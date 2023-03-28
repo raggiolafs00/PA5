@@ -19,6 +19,7 @@ int main () {
     vector<Person*> characters;
     system("clear");
     int option;
+    int selected_char = 0;
     readBeingsFromFile(characters, "characters.txt");
     cout << "Welcome to Dungeon Crawler" << endl;
     cout << "--------------------------------------" << endl;
@@ -40,11 +41,14 @@ int main () {
             createCharacter(characters, characterFile);
             break;
         case 2:
-            showCharacters(characters);
+            selected_char = showCharacters(characters);
             break;
         case 3:
             writeCharactersToFile(characters, characterFile);
             exit(0);
+        case 4:
+            
+            break;
         default:
             exit(0);
         }

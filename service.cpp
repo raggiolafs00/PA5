@@ -190,7 +190,7 @@ void readBeingsFromFile(vector <Person*> &characters, string filename) {
     file.close();
 }
 
-void showCharacters(vector <Person*> &characters) {
+int showCharacters(vector <Person*> &characters) {
     int choice;
     // show the created characters
     while (choice != 0) {
@@ -203,7 +203,10 @@ void showCharacters(vector <Person*> &characters) {
 
         system("clear");
         if (choice == 0) {
-            return;
+            return choice;
+        }
+        else {
+            return choice;
         }
     }
     return;
