@@ -1,0 +1,2 @@
+Name,Life,Strength,Intelligence,Type,AC,Gender,Level,Experience,WeaponName,WeaponStat,ArmorName,ConsumablesName,ConsumableStat,SpecialAction,Race,PlayerClass
+Ragnar,20,5,0,Person,12,male,1,10,Short Sword,8,Chain Mail,Potion of Healing,4,Frenzy,Human,Warrior

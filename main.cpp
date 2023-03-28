@@ -1,5 +1,6 @@
 #include "beings.h"
 #include "service.h"
+#include "dungeon2.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -46,8 +47,6 @@ int main () {
         case 3:
             writeCharactersToFile(characters, characterFile);
             exit(0);
-        case 4:
-            
             break;
         default:
             exit(0);
