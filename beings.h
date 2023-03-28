@@ -55,8 +55,10 @@ class Person : public Being {
 class Creature : public Being {
 
     public:
-    Creature(string name, int life, int strength, int intelligence, int AC, int experience, string type);
+    Creature(string name, int life, int strength, int intelligence, int AC, int experience, string weaponName, int weaponStat, string type);
     string type;
+    string weaponName;
+    int weaponStat;
     int experience;
 
     virtual void showTemplate() {
@@ -69,8 +71,11 @@ class Creature : public Being {
 
 class Boss : public Creature {
     public:
-    Boss(string name, int life, int strength, int intelligence, int AC, int experience, string type);
+    Boss(string name, int life, int strength, int intelligence, int AC, int experience, string weaponName, int weaponStat, string specialAction, string type);
     string type;
+    string weaponName;
+    int weaponStat;
+    string specialAction;
 
     virtual void showTemplate() {
         cout << "---------- " << name << " ----------" << endl;

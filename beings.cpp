@@ -26,14 +26,19 @@ Person::Person(string name, int life, int strength, int intelligence, int AC, st
     this->specialAction = specialAction;
 }
 
-Creature::Creature(string name, int life, int strength, int intelligence, int AC, int experience, string type = "Creature")
+Creature::Creature(string name, int life, int strength, int intelligence, int AC, int experience, string weaponName, int weaponStat, string type = "Creature")
     : Being(name, life, strength, intelligence, AC, type) {
+    this->experience = experience;
+    this->weaponName = weaponName;
+    this->weaponStat = weaponStat;
     this->type = type;
 }
 
-Boss::Boss(string name, int life, int strength, int intelligence, int AC, int experience, string type = "Boss")
-    : Creature(name, life, strength, intelligence, AC, experience, type) {
+Boss::Boss(string name, int life, int strength, int intelligence, int AC, int experience, string weponName, int weaponStat, string specialAction, string type = "Boss")
+    : Creature(name, life, strength, intelligence, AC, experience, weaponName, weaponStat, type) {
     this->type = type;
+    this->specialAction = specialAction;
+
 }
 
 
