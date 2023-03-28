@@ -1,5 +1,6 @@
 #include "beings.h"
 #include "service.h"
+#include "dungeon2.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -20,6 +21,7 @@ int main () {
     system("clear");
     int option;
     readBeingsFromFile(characters, "characters.txt");
+    Person *character = characters[0];
     cout << "Welcome to Dungeon Crawler" << endl;
     cout << "--------------------------------------" << endl;
     cout << endl;
@@ -45,6 +47,11 @@ int main () {
         case 3:
             writeCharactersToFile(characters, characterFile);
             exit(0);
+            break;
+        case 4:
+            // battle
+            startDungeon(*character);
+            break;
         default:
             exit(0);
         }

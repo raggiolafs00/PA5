@@ -11,13 +11,37 @@ class Being {
 
     string name;
     int life;
+    int maxLife;
     int strength;
     int intelligence;
     int AC;
     string type;
 
 
-    virtual void dummy() {}
+    int getLife() {
+        return life;
+    }
+
+    int getStrength() {
+        return strength;
+    }
+
+    int getIntelligence() {
+        return intelligence;
+    }
+
+    int getAC() {
+        return AC;
+    }
+
+    void setLife(int life) {
+        this->life = life;
+    }
+
+    void restoreMaxLife() {
+        this->life = maxLife;
+    }
+
 };
 
 class Person : public Being {
@@ -50,6 +74,14 @@ class Person : public Being {
         cout << "Gender: " << gender << endl;
         cout << "Special Action: " << specialAction << endl;
     }
+
+    void addExperience(int experience) {
+        this->experience += experience;
+    }
+
+    void addConsumable(string consumable, int amount) {
+        consumables[consumable] += amount;
+    }
 };
 
 class Creature : public Being {
@@ -66,6 +98,10 @@ class Creature : public Being {
         cout << "Life: " << life << endl;
         cout << "Strength: " << strength << endl;
         cout << "Intelligence: " << intelligence << endl;
+    }
+
+    int getExperience () {
+        return this->experience;
     }
 };
 
