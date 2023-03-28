@@ -9,14 +9,15 @@ Being::Being(string name, int life, int strength, int intelligence, int AC, stri
     this->type = type;
 };
 
-Person::Person(string name, int life, int strength, int intelligence, int AC, string gender, int level, int experience, map<string, int> weapons, map<string, int> armor, map<string, int> consumables, string specialAction, string race, string playerClass, string type = "Person") 
+Person::Person(string name, int life, int strength, int intelligence, int AC, string gender, int level, int experience, string weaponName, int weaponStat, string armorName, map<string, int> consumables, string specialAction, string race, string playerClass, string type = "Person") 
 : Being(name, life, strength, intelligence, AC, type) {
     this->gender = gender;
     this->type = type;
     this->level = level;
     this->experience = experience;
-    this->weapons = weapons;
-    this->armor = armor;
+    this->weaponName = weaponName;
+    this->weaponStat = weaponStat;
+    this->armorName = armorName;
     this->consumables = consumables;
     this->race = race;
     this->playerClass = playerClass;

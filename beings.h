@@ -24,14 +24,15 @@ class Person : public Being {
     
 
     public:
-    Person(string name, int life, int strength, int intelligence, int AC, string gender, int level, int experience, map<string, int> weapons, map<string, int> armor, map<string, int> consumables, string specialAction, string race, string playerClass, string type);
+    Person(string name, int life, int strength, int intelligence, int AC, string gender, int level, int experience, string weaponName, int weaponStat, string armorName, map<string, int> consumables, string specialAction, string race, string playerClass, string type);
 
     string gender;
     string type;
     int level;
     int experience;
-    map<string, int> weapons;
-    map<string, int> armor;
+    string weaponName;
+    int weaponStat;
+    string armorName;
     map<string, int> consumables;
     string specialAction;
     string race;
