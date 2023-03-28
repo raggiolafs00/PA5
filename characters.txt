@@ -1,0 +1,4 @@
+Name,Life,Strength,Intelligence,Type,AC,Gender,Level,Experience,WeaponName,WeaponStat,ArmorName,ArmorStat,ConsumablesName,ConsumableStat,SpecialAction,Race,PlayerClass
+Hours,14,5,0,Person,12,male,1,0,Short Sword,8,Chain Mail,12,Potion of Healing,4,Frenzy,Human,Warrior
+Dada,13,5,1,Person,10,male,1,0,Dagger,6,Leather Armor,10,Potion of Healing,4,Sneak Attack,Dwarf,Rogue
+arnar,12,4,2,Person,12,male,1,0,Short Sword,8,Chain Mail,12,Potion of Healing,4,Frenzy,Elf,Warrior

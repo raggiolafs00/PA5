@@ -1,0 +1,43 @@
+#include "beings.h"
+
+Being::Being(string name, int life, int strength, int intelligence, int AC, string type) {
+    this->name = name;
+    this->life = life;
+    this->strength = strength;
+    this->intelligence = intelligence;
+    this->AC = AC;
+    this->type = type;
+};
+
+Person::Person(string name, int life, int strength, int intelligence, int AC, string gender, int level, int experience, map<string, int> weapons, map<string, int> armor, map<string, int> consumables, string specialAction, string race, string playerClass, string type = "Person") 
+: Being(name, life, strength, intelligence, AC, type) {
+    this->gender = gender;
+    this->type = type;
+    this->level = level;
+    this->experience = experience;
+    this->weapons = weapons;
+    this->armor = armor;
+    this->consumables = consumables;
+    this->race = race;
+    this->playerClass = playerClass;
+    this->specialAction = specialAction;
+}
+
+Creature::Creature(string name, int life, int strength, int intelligence, int AC, int experience, string type = "Creature")
+    : Being(name, life, strength, intelligence, AC, type) {
+    this->type = type;
+}
+
+Boss::Boss(string name, int life, int strength, int intelligence, int AC, int experience, string type = "Boss")
+    : Creature(name, life, strength, intelligence, AC, experience, type) {
+    this->type = type;
+}
+
+
+
+
+
+
+
+
+
