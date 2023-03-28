@@ -7,6 +7,8 @@ Being::Being(string name, int life, int strength, int intelligence, int AC, stri
     this->intelligence = intelligence;
     this->AC = AC;
     this->type = type;
+
+    
 };
 
 Person::Person(string name, int life, int strength, int intelligence, int AC, string gender, int level, int experience, string weaponName, int weaponStat, string armorName, map<string, int> consumables, string specialAction, string race, string playerClass, string type = "Person") 
