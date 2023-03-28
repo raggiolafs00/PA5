@@ -200,8 +200,13 @@ void readBeingsFromFile(vector <Person*> &characters, string filename) {
     file.close();
 }
 
+<<<<<<< Updated upstream
 void showCharacters(vector <Person*> &characters) {
     int choice;
+=======
+int showCharacters(vector <Person*> &characters) {
+    int choice = 10;
+>>>>>>> Stashed changes
     // show the created characters
     while (choice != 0) {
         cout << "-----------Characters----------" << endl;
@@ -216,5 +221,5 @@ void showCharacters(vector <Person*> &characters) {
             return;
         }
     }
-    return;
+    return choice;
 }

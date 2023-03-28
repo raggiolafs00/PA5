@@ -1,5 +1,6 @@
 #include "beings.h"
 #include "service.h"
+#include "dungeon1.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -24,6 +25,7 @@ int main () {
     cout << "--------------------------------------" << endl;
     cout << endl;
     // create a file to save the characters
+    Person *character;
     ofstream characterFile;
     characterFile.open("characters.txt");
 
@@ -31,7 +33,8 @@ int main () {
         cout << "Choose an option: " << endl;
         cout << "1. Create Character" << endl;
         cout << "2. Show Character List" << endl;
-        cout << "3. Exit" << endl;
+        cout << "3. Enter your dungeon" << endl;
+        cout << "4. Exit" << endl;
         cin >> option;
         system("clear");
         switch (option)
@@ -40,9 +43,17 @@ int main () {
             createCharacter(characters, characterFile);
             break;
         case 2:
+<<<<<<< Updated upstream
             showCharacters(characters);
+=======
+            selected_char = showCharacters(characters);
+            character = characters[selected_char];
+>>>>>>> Stashed changes
             break;
         case 3:
+            entrance(*character);
+            break;
+        case 4:
             writeCharactersToFile(characters, characterFile);
             exit(0);
         default:
