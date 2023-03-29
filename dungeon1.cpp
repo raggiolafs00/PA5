@@ -125,27 +125,30 @@ void searchRoom(Person &character){
     // random number generator from 1 to 10
     srand(time(NULL));
     int random = rand() % 10 + 1;
-    if (random <= 6) {
+    if (random <= 2 {
         cout << "You find nothing" << endl;
         cin.get();
         system("clear");
     }
-    else if (random > 6 && random <= 8) {
+    else if (random <= 6) {
         cout << "You find a potion" << endl;
         cin.get();
         system("clear");
         // add potion to inventory
     }
-    else if (random > 9 && random <= 10) {
+     else if (random <= 9) {
+        cout << "You find a potion" << endl;
+        cin.get();
+        system("clear");
+        // add potion to inventory
+    }
+    else {
         cout << "You find a weird shrine" << endl;
         cin.get();
-        cout << "Do you feel lucky?" << endl;
         system("clear");
         int option;
-        cout << "1. Yes" << endl;
-        cout << "2. No" << endl;
-        cin >> option;
-        switch (option)
+        cout << "when you approach it an aura surrounds you" << endl;
+
         {
         case 1:
             random = rand() % 20 + 1;
@@ -153,16 +156,13 @@ void searchRoom(Person &character){
                 cout << "";
 
             }
-            else if (random <= 5) {
-                cout << "You feel a surge of energy" << endl;
-                cin.get();
-                system("clear");
-                character.setLife(character.getLife() + 10);
-                cout << "You have gained 10 life" << endl;
+            else if (random < 6) {
+                cout << "You suddenly feel as if you just refreshed as if all your ailments have dissapeared" << endl;
+                character.getMaxLife();
                 cin.get();
                 system("clear");
             }
-            else {
+            else if (random < 11) {
                 cout << "You feel a surge of energy" << endl;
                 cin.get();
                 system("clear");
