@@ -174,7 +174,3 @@ void battle(Person &character, Creature &enemy) {
     }
 };
 
-void dodo() {
-    cout << "dodo" << endl;
-    
-};

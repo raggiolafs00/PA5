@@ -114,14 +114,21 @@ class Person : public Being {
     string getWeaponType() {
         return this->weaponType;
     }
-
+    string getWeaponName() {
+        return this->weaponName;
+    }
     int getWeaponStat() {
         return this->weaponStat;
     }
     int getConsumables() {
         return this->consumables;
     }
-    
+    void setWeaponStat(int weaponStat) {
+        this->weaponStat += weaponStat;
+    }
+    void setWeaponName(string weaponName) {
+        this->weaponName = weaponName;
+    }
 
     string getSpecialAction() {
         return this->specialAction;
