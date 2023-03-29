@@ -1,5 +1,6 @@
 #include "beings.h"
 #include "service.h"
+#include "dungeon1.h"
 #include <iostream>
 #include <chrono>
 #include <fstream>
@@ -13,16 +14,30 @@
 
 using namespace std;
 
+
 void battle(Person &character, Creature &enemy) {
     srand(chrono::system_clock::to_time_t(chrono::system_clock::now()));
     // battle system
-    int attackRoll, damageRoll;
+    int attackRoll, damageRoll; 
+    const string battleOptions = " _______________________ \n"
+                                 "|   Choose an action    |\n"
+                                 "|_______________________|\n"
+                                 "| 1. Attack             |\n"
+                                 "| 2. Use Item           |\n"
+                                 "| 3. Use Special Action |\n"
+                                 "| 4. Run                |\n"
+                                 "|_______________________|\n ";
+    cout << "You have encountered a " << enemy.getName() << endl;
     while (character.getLife() > 0 && enemy.getLife() > 0) {
-        cout << "Choose an action: " << endl;
-        cout << "1. Attack" << endl;
-        cout << "2. Use Item" << endl;
-        cout << "3. Use Special Action" << endl;
-        cout << "4. Run" << endl;
+
+        cout << "You have " << character.getLife() << " life" << endl;
+        cout << enemy.getName() << "has " << enemy.getLife() << " life" << endl;
+        // cout << "Choose an action: " << endl;
+        // cout << "1. Attack" << endl;
+        // cout << "2. Use Item" << endl;
+        // cout << "3. Use Special Action" << endl;
+        // cout << "4. Run" << endl;
+        cout << battleOptions << endl;
         int option;
         cin >> option;
         system("clear");
@@ -79,4 +94,9 @@ void battle(Person &character, Creature &enemy) {
         character.addExperience(enemy.getExperience());
         return;
     }
+};
+
+void dodo() {
+    cout << "dodo" << endl;
+    
 };

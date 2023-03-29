@@ -17,7 +17,10 @@ class Being {
     int AC;
     string type;
 
-
+    string getName() const {
+        return name;
+    }
+    
     int getLife() {
         return life;
     }

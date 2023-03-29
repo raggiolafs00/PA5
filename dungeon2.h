@@ -6,3 +6,4 @@ using namespace std;
 
 void startDungeon(Person &character);
 void battle(Person &character, Creature &enemy);
+void dodo();

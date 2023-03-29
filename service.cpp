@@ -191,7 +191,7 @@ void readBeingsFromFile(vector <Person*> &characters, string filename) {
 }
 
 int showCharacters(vector <Person*> &characters) {
-    int choice;
+    int choice = 10;
     // show the created characters
     while (choice != 0) {
         cout << "-----------Characters----------" << endl;
@@ -209,5 +209,5 @@ int showCharacters(vector <Person*> &characters) {
             return choice;
         }
     }
-    return;
+    return choice;
 }

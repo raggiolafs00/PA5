@@ -1,6 +1,7 @@
 #include "beings.h"
 #include "service.h"
 #include "dungeon2.h"
+#include "dungeon1.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -18,6 +19,8 @@ using namespace std;
 
 int main () {
     vector<Person*> characters;
+    Person *character;
+    
     system("clear");
     int option;
     int selected_char = 0;
@@ -33,7 +36,8 @@ int main () {
         cout << "Choose an option: " << endl;
         cout << "1. Create Character" << endl;
         cout << "2. Show Character List" << endl;
-        cout << "3. Exit" << endl;
+        cout << "3. Enter Dungeon" << endl;
+        cout << "4. Exit" << endl;
         cin >> option;
         system("clear");
         switch (option)
@@ -43,8 +47,14 @@ int main () {
             break;
         case 2:
             selected_char = showCharacters(characters);
+            character = characters[0];
+           
             break;
+         
         case 3:
+            startDungeon(*character);
+            break;
+        case 4:
             writeCharactersToFile(characters, characterFile);
             exit(0);
             break;
