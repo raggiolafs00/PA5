@@ -1,6 +1,8 @@
 #include "beings.h"
 #include "service.h"
 #include "dungeon1.h"
+#include "dungeon2.h"
+#include "dungeonService.h"
 #include <iostream>
 #include <chrono>
 #include <fstream>
@@ -14,6 +16,57 @@
 
 using namespace std;
 
+bool deathCheck(Being &character) {
+    if (character.getLife() <= 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+void useSpecialAction(string specialAction, Person &character, Creature &enemy) {
+    if (specialAction == "Frenzy") {
+        cout << "You surge with energy and attack the enemy 5 times!" << endl;
+        for (int i = 0; i < 5; i++) {
+            if (enemy.getLife() <= 0) {
+                return;
+            }
+            int attackRoll = (rand() % 20 + 1) + character.getStrength();
+            if (attackRoll > enemy.getAC()) {
+                int damageRoll = (rand() % character.getWeaponStat() + 1) + character.getStrength();
+                enemy.setLife(enemy.getLife() - damageRoll);
+                cout << "You hit the enemy for " << damageRoll << " damage" << endl;
+            }
+            else {
+                cout << "You missed" << endl;
+            }
+        }
+        return;
+    } 
+    else if (specialAction == "True shot") {
+        cout << "You focus your aim and fire a true shot at the enemy!" << endl;
+        int damageRoll = character.getWeaponStat() * 3;
+        enemy.setLife(enemy.getLife() - damageRoll);
+        cout << "You hit the enemy for " << damageRoll << " damage" << endl;
+        return;
+    }
+    else {
+        cout << "You attack the enemy with a vicious strike, gaining life in return!" << endl;
+        int attackRoll = (rand() % 20 + 1) + character.getStrength();
+        if (attackRoll > enemy.getAC()) {
+            int damageRoll = (rand() % character.getWeaponStat() + 1) + character.getStrength();
+            enemy.setLife(enemy.getLife() - damageRoll);
+            cout << "You hit the enemy for " << damageRoll << " damage" << endl;
+            character.setLife(character.getLife() + damageRoll);
+            cout << "You heal for " << damageRoll << " life" << endl;
+        }
+        else {
+            cout << "You missed" << endl;
+        }
+        return;
+    }
+}
 
 void battle(Person &character, Creature &enemy) {
     srand(chrono::system_clock::to_time_t(chrono::system_clock::now()));
@@ -73,7 +126,15 @@ void battle(Person &character, Creature &enemy) {
                 break;
             case 3:
                 // use special action
-                break;
+                if (character.getSpecialActionCount() > 0) {
+                cout << "You used " << character.getSpecialAction() << endl;
+                useSpecialAction(character.getSpecialAction(), character, enemy);
+                character.setSpecialActionCount(character.getSpecialActionCount() - 1);
+            }
+            else {
+                cout << "You have no special actions left" << endl;
+            }
+            break;
             case 4:
                 // run
                 break;
@@ -81,10 +142,11 @@ void battle(Person &character, Creature &enemy) {
                 break;
             }
         } while (repeatMove);
-        // enemy attack
+        
         if (enemy.getLife() <= 0) {
             break;
         }
+        // enemy attack
         attackRoll = (rand() % 20 + 1) + enemy.getStrength();
         if (attackRoll > character.getAC()) {
             damageRoll = (rand() % enemy.getWeaponStat() + 1) + enemy.getStrength();
@@ -112,3 +174,7 @@ void battle(Person &character, Creature &enemy) {
     }
 };
 
+void dodo() {
+    cout << "dodo" << endl;
+    
+};

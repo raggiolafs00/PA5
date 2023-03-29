@@ -62,7 +62,7 @@ class Person : public Being {
     
 
     public:
-    Person(string name, int life, int strength, int intelligence, int AC, string gender, int level, int experience, string weaponName, string weaponType, int weaponStat, string armorName, int consumables, string specialAction, string race, string playerClass, string type);
+    Person(string name, int life, int strength, int intelligence, int AC, string gender, int level, int experience, string weaponName, string weaponType, int weaponStat, string armorName, int consumables, string specialAction, int specialActionCount, string race, string playerClass, string type);
 
     string gender;
     string type;
@@ -74,6 +74,7 @@ class Person : public Being {
     string armorName;
     int consumables;
     string specialAction;
+    int specialActionCount;
     string race;
     string playerClass;
 
@@ -121,6 +122,22 @@ class Person : public Being {
         return this->consumables;
     }
     
+
+    string getSpecialAction() {
+        return this->specialAction;
+    }
+
+    int getSpecialActionCount() {
+        return this->specialActionCount;
+    }
+
+    void setSpecialActionCount(int specialActionCount) {
+        this->specialActionCount = specialActionCount;
+    }
+
+    void restoreSpecialActionCount() {
+        this->specialActionCount = 3;
+    }
 };
 
 class Creature : public Being {
