@@ -1,0 +1,1 @@
+Name,Life,Strength,Intelligence,Type,AC,Gender,Level,Experience,WeaponName,WeaponStat,ArmorName,ConsumablesName,ConsumableStat,SpecialAction,Race,PlayerClass

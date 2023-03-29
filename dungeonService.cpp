@@ -32,11 +32,7 @@ void battle(Person &character, Creature &enemy) {
 
         cout << "You have " << character.getLife() << " life" << endl;
         cout << enemy.getName() << "has " << enemy.getLife() << " life" << endl;
-        // cout << "Choose an action: " << endl;
-        // cout << "1. Attack" << endl;
-        // cout << "2. Use Item" << endl;
-        // cout << "3. Use Special Action" << endl;
-        // cout << "4. Run" << endl;
+     
         cout << battleOptions << endl;
         int option;
         cin >> option;
