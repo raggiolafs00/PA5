@@ -20,6 +20,9 @@ void dungeonCreatures(vector <Creature*> &enemies) {
     Creature *slime = new Creature("Green Slime", 20, 1, 0, 8, 15, "", 1, "Creature");
     Creature *goblin2 = new Creature("Goblin", 20, 3, 0, 8, 10, "Dagger", 4, "Creature");
     enemies.push_back(goblin);
+    enemies.push_back(goblin);
+    enemies.push_back(goblin);
+    enemies.push_back(goblin);
     // enemies.push_back(goblin1);
     // enemies.push_back(goblin2);
     // enemies.push_back(goblin2);
@@ -30,6 +33,7 @@ void dungeonCreatures(vector <Creature*> &enemies) {
 
 bool deathCheck(Person &character) {
     if (character.getLife() <= 0) {
+        character.restoreMaxLife();
         return true;
     }
     else {
@@ -37,7 +41,7 @@ bool deathCheck(Person &character) {
     }
 }
 
-void startDungeon(Person &character){
+void startDungeon1(Person &character){
     vector<Creature*> enemies;
     dungeonCreatures(enemies);
 

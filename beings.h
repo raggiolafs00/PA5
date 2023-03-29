@@ -24,6 +24,9 @@ class Being {
     int getLife() {
         return life;
     }
+    int getMaxLife() {
+        return maxLife;
+    }
 
     int getStrength() {
         return strength;
@@ -59,7 +62,7 @@ class Person : public Being {
     
 
     public:
-    Person(string name, int life, int strength, int intelligence, int AC, string gender, int level, int experience, string weaponName, string weaponType, int weaponStat, string armorName, map<string, int> consumables, string specialAction, string race, string playerClass, string type);
+    Person(string name, int life, int strength, int intelligence, int AC, string gender, int level, int experience, string weaponName, string weaponType, int weaponStat, string armorName, int consumables, string specialAction, string race, string playerClass, string type);
 
     string gender;
     string type;
@@ -69,7 +72,7 @@ class Person : public Being {
     string weaponType;
     int weaponStat;
     string armorName;
-    map<string, int> consumables;
+    int consumables;
     string specialAction;
     string race;
     string playerClass;
@@ -103,8 +106,8 @@ class Person : public Being {
         this->level = level;
     }
 
-    void addConsumable(string consumable, int amount) {
-        consumables[consumable] += amount;
+    void addConsumable(int amount) {
+        this->consumables += amount;
     }
 
     string getWeaponType() {
@@ -114,6 +117,10 @@ class Person : public Being {
     int getWeaponStat() {
         return this->weaponStat;
     }
+    int getConsumables() {
+        return this->consumables;
+    }
+    
 };
 
 class Creature : public Being {

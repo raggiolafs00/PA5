@@ -1,1 +1,2 @@
-Name,Life,Strength,Intelligence,Type,AC,Gender,Level,Experience,WeaponName,WeaponStat,ArmorName,ConsumablesName,ConsumableStat,SpecialAction,Race,PlayerClass
+Name,Life,Strength,Intelligence,Type,AC,Gender,Level,Experience,WeaponName,WeaponType,WeaponStat,ArmorName,Consumables,SpecialAction,Race,PlayerClass
+1,14,5,0,Person,12,1,1,10,3,Short Sword,Melee,8,Chain Mail,3,Frenzy,Human,Warrior

@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void startDungeon(Person &character);
+void startDungeon1(Person &character);
 void dungeonCreatures(vector <Creature*> &creatures);
 bool deathCheck(Person &character);
 void room1Empty(Person &character, vector <Creature*> &enemies);

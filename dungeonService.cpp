@@ -19,51 +19,68 @@ void battle(Person &character, Creature &enemy) {
     srand(chrono::system_clock::to_time_t(chrono::system_clock::now()));
     // battle system
     int attackRoll, damageRoll, cont; 
+    int pot_amount;
     const string battleOptions = " _______________________\n"
                                  "|   Choose an action    |\n"
                                  "|_______________________|\n"
                                  "| 1. Attack             |\n"
-                                 "| 2. Use Item           |\n"
+                                 "| 2. health potion      |\n"
                                  "| 3. Use Special Action |\n"
                                  "| 4. Run                |\n"
                                  "|_______________________|\n ";
     cout << "You have encountered a " << enemy.getName() << endl;
     while (character.getLife() > 0 && enemy.getLife() > 0) {
-
-        cout << "You have " << character.getLife() << " life" << endl;
-        cout << enemy.getName() << " has " << enemy.getLife() << " life" << endl;
-
-        cout << battleOptions << endl;
         int option;
-        cin >> option;
-        system("clear");
-        switch (option)
-        {
-        case 1:
-            // attack
-            attackRoll = (rand() % 20 + 1) + character.getStrength();
-            if (attackRoll > enemy.getAC()) {
-                damageRoll = (rand() % character.getWeaponStat() + 1) + character.getStrength();
-                enemy.setLife(enemy.getLife() - damageRoll);
-                cout << "You hit the enemy for " << damageRoll << " damage" << endl;
-            }
-            else {
-                cout << "You missed" << endl;
-            }
-            break;
-        case 2:
-            // use item
-            break;
-        case 3:
-            // use special action
-            break;
-        case 4:
-            // run
-            break;
-        default:
-            break;
-        }
+        bool repeatMove = false;
+        do {
+            repeatMove = false;
+            cout << "You have " << character.getLife() << " life" << endl;
+            cout << enemy.getName() << " has " << enemy.getLife() << " life" << endl;
 
+            cout << battleOptions << endl;
+
+            cin >> option;
+            system("clear");
+            switch (option) {
+            case 1:
+                // attack
+                attackRoll = (rand() % 20 + 1) + character.getStrength();
+                if (attackRoll > enemy.getAC()) {
+                    damageRoll = (rand() % character.getWeaponStat() + 1) + character.getStrength();
+                    enemy.setLife(enemy.getLife() - damageRoll);
+                    cout << "You hit the enemy for " << damageRoll << " damage" << endl;
+                }
+                else {
+                    cout << "You missed" << endl;
+                }
+                break;
+            case 2:
+                if (character.getConsumables() > 0) {
+                    if (character.getLife() + (10 * character.getLevel()) > character.getMaxLife()) {
+                        character.setLife(character.getMaxLife());
+                    }
+                    else {
+                        character.setLife(character.getLife() + (10 * character.getLevel()));
+                    }
+                    character.addConsumable(-1);
+                    cout << "You used a health potion" << endl;
+                    cout << "You have " << character.getConsumables() << " left" << endl;
+                }
+                else {
+                    cout << "You don't have any health potions" << endl;
+                }
+                repeatMove = true;
+                break;
+            case 3:
+                // use special action
+                break;
+            case 4:
+                // run
+                break;
+            default:
+                break;
+            }
+        } while (repeatMove);
         // enemy attack
         if (enemy.getLife() <= 0) {
             break;
@@ -95,7 +112,3 @@ void battle(Person &character, Creature &enemy) {
     }
 };
 
-void dodo() {
-    cout << "dodo" << endl;
-    
-};
