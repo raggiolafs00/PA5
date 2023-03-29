@@ -51,6 +51,7 @@ int main () {
             break;
          
         case 3:
+            character = characters[0];
             startDungeon1(*character);
             break;
         case 4:

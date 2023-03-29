@@ -84,7 +84,7 @@ void battle(Person &character, Creature &enemy) {
     cout << "You have encountered a " << enemy.getName() << endl;
     while (character.getLife() > 0 && enemy.getLife() > 0) {
         int option;
-        bool repeatMove = false;
+        bool repeatMove;
         do {
             repeatMove = false;
             cout << "You have " << character.getLife() << " life" << endl;
@@ -174,3 +174,79 @@ void battle(Person &character, Creature &enemy) {
     }
 };
 
+
+void searchRoom(Person &character){
+    // random number generator from 1 to 10
+    int cont;
+    cout << "As you walk around you ";
+    srand(time(NULL));
+    int random = rand() % 10 + 1;
+    if (random <= 2) {
+        cout << "You find nothing" << endl;
+        
+    }
+    else if (random <= 6) {
+        cout << "You find a healing potion" << endl;
+        character.addConsumable(1);
+        
+    }
+     else if (random <= 9) {
+        cout << "You find 2 healing potions" << endl;
+        character.addConsumable(2);
+        
+    }
+    else {
+        cout << "You find a weird shrine" << endl;
+        
+        int option;
+        cout << "when you approach it an aura surrounds you" << endl;
+        cout << "Enter 0 to continue: " << endl;
+        cin >> cont;
+        system("clear");
+
+        random = rand() % 20 + 1;
+        if (random == 1) {
+            cout << "you feel as if you have been cursed" << endl;
+            character.setStrength(character.getStrength() - 1);
+            
+
+        }
+        else if (random < 6) {
+            cout << "You suddenly feel as if you just refreshed as if all your ailments have dissapeared" << endl;
+            character.getMaxLife();
+          
+        }
+        else if (random < 13) {
+            cout << "You feel as if you have been blessed" << endl;
+            character.setStrength(character.getStrength() + 1);
+            character.setIntelligence(character.getIntelligence() + 1);
+            character.restoreMaxLife();
+           
+        }
+        else if (random < 20) {
+            cout << "your weapon has been blessed with the power of the gods" << endl;
+            character.setWeaponStat(character.getWeaponStat() + 3);
+            character.setWeaponName("Blessed " + character.getWeaponName());
+           
+            }
+        else {
+            cout << "You feel as if you have been blessed with the power of the gods" << endl;
+            character.setStrength(character.getStrength() + 2);
+            character.setIntelligence(character.getIntelligence() + 2);
+            character.setWeaponStat(character.getWeaponStat() + 5);
+            character.setWeaponName("Blessed " + character.getWeaponName());
+            character.restoreMaxLife();
+           
+
+        }
+
+      
+            
+    
+
+}
+    cout << "Enter 0 to continue: " << endl;
+    cin >> cont;
+    system("clear");
+
+}
