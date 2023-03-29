@@ -18,11 +18,11 @@ using namespace std;
 void battle(Person &character, Creature &enemy) {
     srand(chrono::system_clock::to_time_t(chrono::system_clock::now()));
     // battle system
-    int attackRoll, damageRoll; 
-    const string battleOptions = " _______________________ \n"
+    int attackRoll, damageRoll, cont; 
+    const string battleOptions = " _______________________\n"
                                  "|   Choose an action    |\n"
                                  "|_______________________|\n"
-                                 "| 1. Attack             |\n"
+                                 "| 1. Attack             |\n"
                                  "| 2. Use Item           |\n"
                                  "| 3. Use Special Action |\n"
                                  "| 4. Run                |\n"
@@ -31,8 +31,8 @@ void battle(Person &character, Creature &enemy) {
     while (character.getLife() > 0 && enemy.getLife() > 0) {
 
         cout << "You have " << character.getLife() << " life" << endl;
-        cout << enemy.getName() << "has " << enemy.getLife() << " life" << endl;
-     
+        cout << enemy.getName() << " has " << enemy.getLife() << " life" << endl;
+
         cout << battleOptions << endl;
         int option;
         cin >> option;
@@ -43,7 +43,7 @@ void battle(Person &character, Creature &enemy) {
             // attack
             attackRoll = (rand() % 20 + 1) + character.getStrength();
             if (attackRoll > enemy.getAC()) {
-                damageRoll = (rand() % 6 + 1) + character.getStrength();
+                damageRoll = (rand() % character.getWeaponStat() + 1) + character.getStrength();
                 enemy.setLife(enemy.getLife() - damageRoll);
                 cout << "You hit the enemy for " << damageRoll << " damage" << endl;
             }
@@ -70,7 +70,7 @@ void battle(Person &character, Creature &enemy) {
         }
         attackRoll = (rand() % 20 + 1) + enemy.getStrength();
         if (attackRoll > character.getAC()) {
-            damageRoll = (rand() % 6 + 1) + enemy.getStrength();
+            damageRoll = (rand() % enemy.getWeaponStat() + 1) + enemy.getStrength();
             character.setLife(character.getLife() - damageRoll);
             cout << "The enemy hit you for " << damageRoll << " damage" << endl;
         }
@@ -87,7 +87,10 @@ void battle(Person &character, Creature &enemy) {
         cout << "You killed the enemy" << endl;
         // add experience to character
         cout << "You gained " << enemy.getExperience() << " experience" << endl;
-        character.addExperience(enemy.getExperience());
+        character.setExperience(character.getExperience() + enemy.getExperience());
+        cout << "Enter 0 to continue: " << endl;
+        cin >> cont;
+        system("clear");
         return;
     }
 };
