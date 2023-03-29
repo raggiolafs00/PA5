@@ -11,8 +11,42 @@
 #include <cstdlib>
 #include <ctime>
 
+void levelUp(Person &character) {
+    int option, cont;
+    if (character.getExperience() > 50) {
+        character.setLevel(character.getLevel() + 1);
+        character.setExperience(character.getExperience() - 50);
+        cout << "You leveled up! You are now level " << character.getLevel() << endl;
+        cout << "Choose a stat to increase: " << endl;
+        cout << "1. Life" << endl;
+        cout << "2. Strength" << endl;
+        cout << "3. Intelligence" << endl;
+        cin >> option;
+        system("clear");
+        switch (option)
+        {
+        case 1:
+            character.setLife(character.getLife() + 15);
+            break;
+        case 2:
+            character.setStrength(character.getStrength() + 2);
+            break;
+        case 3:
+            character.setIntelligence(character.getIntelligence() + 2);
+            break;
+        }
+        character.showTemplate();
+        cout << "Enter 0 to continue: " << endl;
+        cin >> cont;
+        system("clear");
+    } else {
+        cout << "You need " << 50 - character.getExperience() << " more experience to level up" << endl;
+        return;
+    }
+}
+
 void createCharacter(vector <Person*> &characters, ofstream &characterFile) {
-    string race, playerClass, specialAction, gender, name, weaponName, armorName;
+    string race, playerClass, specialAction, gender, name, weaponName, weaponType, armorName;
     int life, strength, intelligence, level, experience, AC, weaponStat, armorStat;
     map<string, int> consumables;
     cout << "Choose a race: " << endl;
@@ -62,6 +96,7 @@ void createCharacter(vector <Person*> &characters, ofstream &characterFile) {
         strength += 2;
         intelligence -= 1;
         weaponName = "Short Sword";
+        weaponType = "Melee";
         weaponStat = 8;
         armorName = "Chain Mail";
         consumables["Potion of Healing"] = 4;
@@ -74,6 +109,7 @@ void createCharacter(vector <Person*> &characters, ofstream &characterFile) {
         life -= 1;
         intelligence += 2;
         weaponName = "Long Bow";
+        weaponType = "Ranged";
         weaponStat = 10;
         armorName = "Leather Armor";
         consumables["Potion of Healing"] = 4;
@@ -87,6 +123,7 @@ void createCharacter(vector <Person*> &characters, ofstream &characterFile) {
         strength += 1;
         intelligence += 1;
         weaponName = "Dagger";
+        weaponType = "Melee";
         weaponStat = 6;
         armorName = "Leather Armor";
         consumables["Potion of Healing"] = 4;
@@ -102,7 +139,7 @@ void createCharacter(vector <Person*> &characters, ofstream &characterFile) {
     cin >> name;
     system("clear");
     cout << "Your character is: " << endl;
-    Person *character = new Person(name, life, strength, intelligence, AC, gender, level, experience, weaponName, weaponStat, armorName, consumables, specialAction, race, playerClass, "Person");
+    Person *character = new Person(name, life, strength, intelligence, AC, gender, level, experience, weaponName, weaponType, weaponStat, armorName, consumables, specialAction, race, playerClass, "Person");
     // cout << character->race << endl;
     // cout << character->playerClass << endl;
     // cout << character->specialAction << endl;
@@ -111,8 +148,8 @@ void createCharacter(vector <Person*> &characters, ofstream &characterFile) {
 
 void writeCharactersToFile(vector <Person*> &characters, std::ofstream &characterFile) {
     // Write header row
-    characterFile << "Name,Life,Strength,Intelligence,Type,AC,Gender,Level,Experience,WeaponName,WeaponStat,ArmorName,ConsumablesName,ConsumableStat,SpecialAction,Race,PlayerClass\n";
-    string weaponName, armorName, consumablesName;
+    characterFile << "Name,Life,Strength,Intelligence,Type,AC,Gender,Level,Experience,WeaponName,WeaponType,WeaponStat,ArmorName,ConsumablesName,ConsumableStat,SpecialAction,Race,PlayerClass\n";
+    string weaponName, weaponType, armorName, consumablesName;
     int weaponStat, consumableStat;
     // Write data rows
     for (int i = 0; i < characters.size(); i++) {
@@ -130,6 +167,7 @@ void writeCharactersToFile(vector <Person*> &characters, std::ofstream &characte
                     consumableStat = it->second;
                 }
                 characterFile << characters[i]->weaponName << ","
+                    << characters[i]->weaponType << ","
                     << characters[i]->weaponStat << ","
                     << characters[i]->armorName << ","
                     << consumablesName << ","
@@ -151,7 +189,7 @@ void readBeingsFromFile(vector <Person*> &characters, string filename) {
 
         while (getline(file, line)) {
             cout << "Read character" << endl;
-            string race, playerClass, specialAction, type, gender, name, weaponName, armorName, consumablesName;
+            string race, playerClass, specialAction, type, gender, name, weaponName, weaponType, armorName, consumablesName;
             int life, strength, intelligence, level, experience, AC, weaponStat, consumableStat;
             map<string, int> weapons, armor, consumables;
             // Read data from line
@@ -172,6 +210,7 @@ void readBeingsFromFile(vector <Person*> &characters, string filename) {
             ss >> experience;
             ss.ignore();
             getline(ss, weaponName, ',');
+            getline(ss, weaponType, ',');
             ss >> weaponStat;
             ss.ignore();
             getline(ss, armorName, ',');
@@ -183,11 +222,26 @@ void readBeingsFromFile(vector <Person*> &characters, string filename) {
             getline(ss, playerClass, '\n');
 
             consumables[consumablesName] = consumableStat;
-            Person *character = new Person(name, life, strength, intelligence, AC, gender, level, experience, weaponName, weaponStat, armorName, consumables, specialAction, race, playerClass, type);
+            Person *character = new Person(name, life, strength, intelligence, AC, gender, level, experience, weaponName, weaponType, weaponStat, armorName, consumables, specialAction, race, playerClass, type);
             characters.push_back(character);
         }
     }
     file.close();
+}
+
+void printCharacter(Person &character) {
+    character.showTemplate();
+    cout << "[1] Level up character!" << endl;
+    cout << "[0] Back to main menu" << endl;
+    int choice;
+    cin >> choice;
+    system("clear");
+    if (choice == 1) {
+        levelUp(character);
+    }
+    else {
+        return;
+    }
 }
 
 int showCharacters(vector <Person*> &characters) {
@@ -206,8 +260,9 @@ int showCharacters(vector <Person*> &characters) {
             return choice;
         }
         else {
+            printCharacter(*characters[choice - 1]);
             return choice;
         }
     }
-    return;
+    return choice;
 }

@@ -28,12 +28,14 @@ int main () {
     // create a file to save the characters
     ofstream characterFile;
     characterFile.open("characters.txt");
+    Person *character;
 
     while (option != 6) {
         cout << "Choose an option: " << endl;
         cout << "1. Create Character" << endl;
         cout << "2. Show Character List" << endl;
         cout << "3. Exit" << endl;
+        cout << "4. FIGHT!" << endl;
         cin >> option;
         system("clear");
         switch (option)
@@ -47,6 +49,10 @@ int main () {
         case 3:
             writeCharactersToFile(characters, characterFile);
             exit(0);
+            break;
+        case 4:
+            character = characters[1];
+            startDungeon(*character);
             break;
         default:
             exit(0);

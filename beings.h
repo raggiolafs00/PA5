@@ -17,6 +17,9 @@ class Being {
     int AC;
     string type;
 
+    string getName() {
+        return name;
+    }
 
     int getLife() {
         return life;
@@ -38,6 +41,14 @@ class Being {
         this->life = life;
     }
 
+    void setStrength(int strength) {
+        this->strength = strength;
+    }
+
+    void setIntelligence(int intelligence) {
+        this->intelligence = intelligence;
+    }
+
     void restoreMaxLife() {
         this->life = maxLife;
     }
@@ -48,13 +59,14 @@ class Person : public Being {
     
 
     public:
-    Person(string name, int life, int strength, int intelligence, int AC, string gender, int level, int experience, string weaponName, int weaponStat, string armorName, map<string, int> consumables, string specialAction, string race, string playerClass, string type);
+    Person(string name, int life, int strength, int intelligence, int AC, string gender, int level, int experience, string weaponName, string weaponType, int weaponStat, string armorName, map<string, int> consumables, string specialAction, string race, string playerClass, string type);
 
     string gender;
     string type;
     int level;
     int experience;
     string weaponName;
+    string weaponType;
     int weaponStat;
     string armorName;
     map<string, int> consumables;
@@ -75,12 +87,32 @@ class Person : public Being {
         cout << "Special Action: " << specialAction << endl;
     }
 
-    void addExperience(int experience) {
-        this->experience += experience;
+    void setExperience(int experience) {
+        this->experience = experience;
+    }
+
+    int getExperience() {
+        return this->experience;
+    }
+
+    int getLevel() {
+        return this->level;
+    }
+
+    void setLevel(int level) {
+        this->level = level;
     }
 
     void addConsumable(string consumable, int amount) {
         consumables[consumable] += amount;
+    }
+
+    string getWeaponType() {
+        return this->weaponType;
+    }
+
+    int getWeaponStat() {
+        return this->weaponStat;
     }
 };
 
@@ -93,7 +125,7 @@ class Creature : public Being {
     int weaponStat;
     int experience;
 
-    virtual void showTemplate() {
+    void showTemplate() {
         cout << "---------- " << name << " ----------" << endl;
         cout << "Life: " << life << endl;
         cout << "Strength: " << strength << endl;
@@ -102,6 +134,10 @@ class Creature : public Being {
 
     int getExperience () {
         return this->experience;
+    }
+
+    int getWeaponStat() {
+        return this->weaponStat;
     }
 };
 
