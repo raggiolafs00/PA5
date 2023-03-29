@@ -48,8 +48,6 @@ int main () {
             break;
         case 2:
             selected_char = showCharacters(characters);
-            character = characters[0];
-           
             break;
          
         case 3:
@@ -59,7 +57,9 @@ int main () {
             writeCharactersToFile(characters, characterFile);
             exit(0);
             break;
-
+        case 5:
+            startDungeon2(*character);
+            break;
         default:
             exit(0);
         }

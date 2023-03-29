@@ -4,5 +4,4 @@
 
 using namespace std;
 
-void startDungeon(Person &character);
-void battle(Person &character, Creature &enemy);
+void startDungeon2(Person &character);

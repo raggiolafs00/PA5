@@ -1,6 +1,8 @@
 #include "beings.h"
 #include "service.h"
 #include "dungeon2.h"
+#include "dungeon1.h"
+#include "dungeonService.h"
 #include <iostream>
 #include <chrono>
 #include <fstream>
@@ -55,10 +57,13 @@ void hallBattle (Person &character, int distance) {
         } else {
             cout << "He missed!" << endl;
         }
+        if (deathCheck(character))
+            return;
         cout << "Enter 0 to continue: " << endl;
         cin >> cont;
         system("clear");
         distance++;
+
     }
     cout << "You manage to reach the undead bowman and are now in attacking range." << endl;
     battle(character, *bowman);
@@ -93,6 +98,8 @@ void theCastleHall(Person &character) {
             cout << "You turn around to see an undead bowman standing in the shadows, his bow drawn back and an arrow nocked." << endl;
             cout << "He lets loose a shot, and the arrow flies straight and true, piercing your shoulder." << endl;
             cout << "You take 5 damage." << endl;
+            if (deathCheck(character))
+                return;
             character.setLife(character.getLife() - 5);
             cout << "You have " << character.getLife() << " life left." << endl;
             cout << "Enter 0 to continue: " << endl;
@@ -112,6 +119,8 @@ void theCastleHall(Person &character) {
             cout << "You turn around and see a lone archer hiding in the shadows, his bow drawn back and an arrow nocked." << endl;
             cout << "You take 5 damage." << endl;
             character.setLife(character.getLife() - 5);
+            if (deathCheck(character))
+                return;
             cout << "You have " << character.getLife() << " life left." << endl;
             cout << "Enter 0 to continue: " << endl;
             cin >> cont;
@@ -119,6 +128,8 @@ void theCastleHall(Person &character) {
             break;
     }
     return hallBattle(character, distance);
+
+    
 }
 
 void theCastleWalls(Person &character) {
@@ -183,8 +194,6 @@ void theCastleWalls(Person &character) {
             break;
     }
     if (character.getLife() <= 0) {
-        cout << "You have died." << endl;
-        cout << "GAME OVER" << endl;
         return;
     } else {
         cout << "You manage to defeat the knight and the enterance to the castle is no longer blocked. You may enter." << endl;
@@ -196,15 +205,23 @@ void theCastleWalls(Person &character) {
     }
 };
 
-void startDungeon(Person &character) {
+void startDungeon2(Person &character) {
     // import creatures and bosses from file
     // vector <Boss*> bosses;
     createEnemies(enemies);
     cout << "ENTER PROLOGUE TEXT HERE!" << endl;
     theCastleWalls(character);
+    if (deathCheck(character)) {
+        cout << "You have died." << endl;
+        cout << "GAME OVER" << endl;
+    } else {
+        cout << "You have defeated the final boss." << endl;
+        cout << "You have won the game!" << endl;
+    }
     // start dungeon
     // reset life of character
     character.restoreMaxLife();
+    character.restoreSpecialActionCount();
     return;
 
 };

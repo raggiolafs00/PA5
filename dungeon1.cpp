@@ -2,6 +2,7 @@
 #include "service.h"
 #include "dungeon1.h"
 #include "dungeon2.h"
+#include "dungeonService.h"
 #include <iostream>
 #include <chrono>
 #include <fstream>
@@ -29,16 +30,6 @@ void dungeonCreatures(vector <Creature*> &enemies) {
     // enemies.push_back(goblin2);
     // enemies.push_back(goblin);
 
-}
-
-bool deathCheck(Person &character) {
-    if (character.getLife() <= 0) {
-        character.restoreMaxLife();
-        return true;
-    }
-    else {
-        return false;
-    }
 }
 
 void startDungeon1(Person &character){
