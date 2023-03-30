@@ -63,6 +63,7 @@ void theInnerSanctum(Person &character) {
     cin >> cont;
     system("clear");
     battle(character, *godrick);
+
 }
 
 void castleSecondFloor(Person &character) {
@@ -98,7 +99,7 @@ void castleSecondFloor(Person &character) {
     cout << "Suddenly there is an explosion of energy that sends you hurtling through the air." << endl;
     cout << "You fly backwards, crashing through the door behind you!" << endl;
     cout << endl;
-    character.setLife(character.getLife() - 20);
+    character.setLife(character.getLife() - 20 + character.getPerception());
     cout << "You take 20 damage from the explosion!" << endl;
     if (deathCheck(character)) {
         cout << "The blast of energy burns your flesh and you fall to the ground" << endl;

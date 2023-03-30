@@ -60,6 +60,7 @@ void createCharacter(vector <Person*> &characters, ofstream &characterFile) {
     cout << "1. Human" << endl;
     cout << "2. Elf" << endl;
     cout << "3. Dwarf" << endl;
+    cout << "4. Review Run" << endl;
     int option;
     cin >> option;
     system("clear");
@@ -87,6 +88,13 @@ void createCharacter(vector <Person*> &characters, ofstream &characterFile) {
         strength = 2;
         perception = 0;
         level = 1;
+        experience = 0;
+        case 4:
+        race = "Human";
+        life = 250;
+        strength = 50;
+        perception = 30;
+        level = 10;
         experience = 0;
     }
     cout << "Choose a class: " << endl;
