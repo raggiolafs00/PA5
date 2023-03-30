@@ -159,7 +159,6 @@ void battle(Person &character, Creature &enemy) {
 
     }
     if (character.getLife() <= 0) {
-        cout << "You died" << endl;
         return;
     }
     else if (enemy.getLife() <= 0) {
@@ -184,24 +183,24 @@ void searchRoom(Person &character){
     srand(time(NULL));
     int random = rand() % 10 + 1;
     if (random <= 2) {
-        cout << "You find nothing" << endl;
+        cout << "find nothing" << endl;
         
     }
     else if (random <= 6) {
-        cout << "You find a healing potion" << endl;
+        cout << "find a healing potion" << endl;
         character.addConsumable(1);
         
     }
      else if (random <= 9) {
-        cout << "You find 2 healing potions" << endl;
+        cout << "find 2 healing potions" << endl;
         character.addConsumable(2);
         
     }
     else {
-        cout << "You find a weird shrine" << endl;
+        cout << "find a weird shrine." << endl;
         
         int option;
-        cout << "when you approach it an aura surrounds you" << endl;
+        cout << "When you approach it an aura surrounds you" << endl;
         cout << "" << endl;
         cout << "Enter 0 to continue: " << endl;
         cin >> cont;
@@ -209,7 +208,7 @@ void searchRoom(Person &character){
 
         random = rand() % 20 + 1;
         if (random == 1) {
-            cout << "you feel as if you have been cursed" << endl;
+            cout << "You feel as if you have been cursed!" << endl;
             character.setStrength(character.getStrength() - 1);
             
 
@@ -227,7 +226,7 @@ void searchRoom(Person &character){
            
         }
         else if (random < 20) {
-            cout << "your weapon has been blessed with the power of the gods" << endl;
+            cout << "Your weapon has been blessed with the power of the gods" << endl;
             character.setWeaponStat(character.getWeaponStat() + 3);
             character.setWeaponName("Blessed " + character.getWeaponName());
            
@@ -242,11 +241,6 @@ void searchRoom(Person &character){
            
 
         }
-
-      
-            
-    
-
 }
     cout << "Enter 0 to continue: " << endl;
     cin >> cont;

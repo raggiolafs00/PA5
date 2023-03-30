@@ -164,7 +164,12 @@ void writeCharactersToFile(vector <Person*> &characters, std::ofstream &characte
                 << characters[i]->AC << ","
                 << characters[i]->gender << "," 
                 << characters[i]->level << ","
-                << characters[i]->experience << ",";
+                << characters[i]->experience << ","
+                << characters[i]->consumables << ",";
+                // for (auto it = characters[i]->consumables.begin(); it != characters[i]->consumables.end(); ++it) {
+                //     consumablesName = it->first;
+                //     consumableStat = it->second;
+                // }
                 characterFile << characters[i]->weaponName << ","
                     << characters[i]->weaponType << ","
                     << characters[i]->weaponStat << ","
