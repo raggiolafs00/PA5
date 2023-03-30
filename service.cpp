@@ -20,19 +20,26 @@ void levelUp(Person &character) {
         cout << "Choose a stat to increase: " << endl;
         cout << "1. Life" << endl;
         cout << "2. Strength" << endl;
-        cout << "3. Intelligence" << endl;
+        cout << "3. perception" << endl;
         cin >> option;
         system("clear");
         switch (option)
         {
         case 1:
-            character.setLife(character.getLife() + 15);
+            character.setMaxLife(character.getMaxLife() + 15);
+            character.setLife(character.getMaxLife());
+            character.setStrength(character.getStrength() + 1);
             break;
         case 2:
-            character.setStrength(character.getStrength() + 2);
+            character.setMaxLife(character.getMaxLife() + 5);
+            character.setLife(character.getMaxLife());
+            character.setStrength(character.getStrength() + 3);
             break;
         case 3:
-            character.setIntelligence(character.getIntelligence() + 2);
+            character.setMaxLife(character.getMaxLife() + 5);
+            character.setLife(character.getMaxLife());
+            character.setStrength(character.getStrength() + 1);
+            character.setPerception(character.getPerception() + 3);
             break;
         }
         character.showTemplate();
@@ -46,8 +53,8 @@ void levelUp(Person &character) {
 }
 
 void createCharacter(vector <Person*> &characters, ofstream &characterFile) {
-    string race, playerClass, specialAction, gender, name, weaponName, weaponType, armorName;
-    int life, strength, intelligence, level, experience, AC, weaponStat, armorStat, specialActionCount;
+    string race, playerClass, specialAction, gender, name, weaponName, weaponType, armorName, bugfix;
+    int life, strength, perception, level, experience, AC, weaponStat, armorStat, specialActionCount;
     int consumables;
     cout << "Choose a race: " << endl;
     cout << "1. Human" << endl;
@@ -62,23 +69,23 @@ void createCharacter(vector <Person*> &characters, ofstream &characterFile) {
         race = "Human";
         life = 12;
         strength = 3;
-        intelligence = 1;
+        perception = 1;
         level = 1;
         experience = 0;
         break;
         case 2:
         race = "Elf";
-        life = 10;
+        life = 11;
         strength = 2;
-        intelligence = 3;
+        perception = 3;
         level = 1;
         experience = 0;
         break;
         case 3:
         race = "Dwarf";
         life = 14;
-        strength = 4;
-        intelligence = 0;
+        strength = 2;
+        perception = 0;
         level = 1;
         experience = 0;
     }
@@ -94,7 +101,7 @@ void createCharacter(vector <Person*> &characters, ofstream &characterFile) {
         playerClass = "Warrior";
         life += 2;
         strength += 2;
-        intelligence -= 1;
+        perception -= 1;
         weaponName = "Short Sword";
         weaponType = "Melee";
         weaponStat = 8;
@@ -108,12 +115,12 @@ void createCharacter(vector <Person*> &characters, ofstream &characterFile) {
         case 2:
         playerClass = "Ranger";
         life -= 1;
-        intelligence += 2;
+        perception += 2;
         weaponName = "Long Bow";
         weaponType = "Ranged";
         weaponStat = 10;
         armorName = "Leather Armor";
-        consumables = 4;
+        consumables = 5;
         AC = 10;
         specialAction = "True shot";
         specialActionCount = 3;
@@ -121,28 +128,30 @@ void createCharacter(vector <Person*> &characters, ofstream &characterFile) {
 
         case 3:
         playerClass = "Rogue";
-        life -= 1;
+        life += 0;
         strength += 1;
-        intelligence += 1;
+        perception += 1;
         weaponName = "Dagger";
         weaponType = "Melee";
-        weaponStat = 6;
+        weaponStat = 7;
         armorName = "Leather Armor";
         consumables = 4;
-        AC = 10;
+        AC = 12;
         specialAction = "Sneak Attack";
         specialActionCount = 3;
         break;
     }
 
+    getline(cin, bugfix);
+
     cout << "Choose gender: " << endl;
-    cin >> gender;
+    getline(cin, gender);
     system("clear");
     cout << "Choose a name: " << endl;
-    cin >> name;
+    getline(cin, name);
     system("clear");
     cout << "Your character is: " << endl;
-    Person *character = new Person(name, life, strength, intelligence, AC, gender, level, experience, weaponName, weaponType, weaponStat, armorName, consumables, specialAction, specialActionCount, race, playerClass, "Person");
+    Person *character = new Person(name, life, strength, perception, AC, gender, level, experience, weaponName, weaponType, weaponStat, armorName, consumables, specialAction, specialActionCount, race, playerClass, "Person");
     // cout << character->race << endl;
     // cout << character->playerClass << endl;
     // cout << character->specialAction << endl;
@@ -151,7 +160,7 @@ void createCharacter(vector <Person*> &characters, ofstream &characterFile) {
 
 void writeCharactersToFile(vector <Person*> &characters, std::ofstream &characterFile) {
     // Write header row
-    characterFile << "Name,Life,Strength,Intelligence,Type,AC,Gender,Level,Experience,WeaponName,WeaponType,WeaponStat,ArmorName,Consumables,SpecialAction,SpecialActionCount,Race,PlayerClass\n";
+    characterFile << "Name,Life,Strength,Perception,Type,AC,Gender,Level,Experience,WeaponName,WeaponType,WeaponStat,ArmorName,Consumables,SpecialAction,SpecialActionCount,Race,PlayerClass\n";
     string weaponName, weaponType, armorName;
     int weaponStat, consumables;
     // Write data rows
@@ -159,26 +168,21 @@ void writeCharactersToFile(vector <Person*> &characters, std::ofstream &characte
         characterFile << characters[i]->name << ","
                 << characters[i]->life << ","
                 << characters[i]->strength << ","
-                << characters[i]->intelligence << ","
+                << characters[i]->perception << ","
                 << characters[i]->type << ","
                 << characters[i]->AC << ","
                 << characters[i]->gender << "," 
                 << characters[i]->level << ","
                 << characters[i]->experience << ","
-                << characters[i]->consumables << ",";
-                // for (auto it = characters[i]->consumables.begin(); it != characters[i]->consumables.end(); ++it) {
-                //     consumablesName = it->first;
-                //     consumableStat = it->second;
-                // }
-                characterFile << characters[i]->weaponName << ","
-                    << characters[i]->weaponType << ","
-                    << characters[i]->weaponStat << ","
-                    << characters[i]->armorName << ","
-                    << characters[i]->consumables << ","
-                    << characters[i]->specialAction << ","
-                    << characters[i]->specialActionCount << ","
-                    << characters[i]->race << ","
-                    << characters[i]->playerClass << "\n";
+                << characters[i]->weaponName << ","
+                << characters[i]->weaponType << ","
+                << characters[i]->weaponStat << ","
+                << characters[i]->armorName << ","
+                << characters[i]->consumables << ","
+                << characters[i]->specialAction << ","
+                << characters[i]->specialActionCount << ","
+                << characters[i]->race << ","
+                << characters[i]->playerClass << "\n";
     };
     // Close file
     characterFile.close();
@@ -193,7 +197,7 @@ void readBeingsFromFile(vector <Person*> &characters, string filename) {
 
         while (getline(file, line)) {
             string race, playerClass, specialAction, type, gender, name, weaponName, weaponType, armorName;
-            int life, strength, intelligence, level, experience, AC, weaponStat, consumables, specialActionCount;
+            int life, strength, perception, level, experience, AC, weaponStat, consumables, specialActionCount;
             map<string, int> weapons, armor;
             // Read data from line
             istringstream ss(line);
@@ -202,7 +206,7 @@ void readBeingsFromFile(vector <Person*> &characters, string filename) {
             ss.ignore();
             ss >> strength; 
             ss.ignore();
-            ss >> intelligence;
+            ss >> perception;
             ss.ignore();
             getline(ss, type, ',');
             ss >> AC;
@@ -226,7 +230,7 @@ void readBeingsFromFile(vector <Person*> &characters, string filename) {
             getline(ss, playerClass, '\n');
 
 
-            Person *character = new Person(name, life, strength, intelligence, AC, gender, level, experience, weaponName, weaponType, weaponStat, armorName, consumables, specialAction, specialActionCount, race, playerClass, type);
+            Person *character = new Person(name, life, strength, perception, AC, gender, level, experience, weaponName, weaponType, weaponStat, armorName, consumables, specialAction, specialActionCount, race, playerClass, type);
             characters.push_back(character);
         }
     }

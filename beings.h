@@ -7,13 +7,13 @@ using namespace std;
 class Being {
 
     public:
-    Being(string name, int life, int strength, int AC, int intelligence, string type);
+    Being(string name, int life, int strength, int AC, int perception, string type);
 
     string name;
     int life;
     int maxLife;
     int strength;
-    int intelligence;
+    int perception;
     int AC;
     string type;
 
@@ -32,8 +32,8 @@ class Being {
         return strength;
     }
 
-    int getIntelligence() {
-        return intelligence;
+    int getPerception() {
+        return perception;
     }
 
     int getAC() {
@@ -47,13 +47,16 @@ class Being {
     void setLife(int life) {
         this->life = life;
     }
+    void setMaxLife(int maxLife) {
+        this->maxLife = maxLife;
+    }
 
     void setStrength(int strength) {
         this->strength = strength;
     }
 
-    void setIntelligence(int intelligence) {
-        this->intelligence = intelligence;
+    void setPerception(int perception) {
+        this->perception = perception;
     }
 
     void restoreMaxLife() {
@@ -66,7 +69,7 @@ class Person : public Being {
     
 
     public:
-    Person(string name, int life, int strength, int intelligence, int AC, string gender, int level, int experience, string weaponName, string weaponType, int weaponStat, string armorName, int consumables, string specialAction, int specialActionCount, string race, string playerClass, string type);
+    Person(string name, int life, int strength, int perception, int AC, string gender, int level, int experience, string weaponName, string weaponType, int weaponStat, string armorName, int consumables, string specialAction, int specialActionCount, string race, string playerClass, string type);
 
     string gender;
     string type;
@@ -90,7 +93,7 @@ class Person : public Being {
         cout << "Level: " << level << endl;
         cout << "Experience: " << experience << endl;
         cout << "Strength: " << strength << endl;
-        cout << "Intelligence: " << intelligence << endl;
+        cout << "Perception: " << perception << endl;
         cout << "Gender: " << gender << endl;
         cout << "Special Action: " << specialAction << endl;
     }
@@ -133,7 +136,7 @@ class Person : public Being {
         return this->consumables;
     }
     void setWeaponStat(int weaponStat) {
-        this->weaponStat += weaponStat;
+        this->weaponStat = weaponStat;
     }
     void setWeaponName(string weaponName) {
         this->weaponName = weaponName;
@@ -170,7 +173,7 @@ class Person : public Being {
 class Creature : public Being {
 
     public:
-    Creature(string name, int life, int strength, int intelligence, int AC, int experience, string weaponName, int weaponStat, string type);
+    Creature(string name, int life, int strength, int perception, int AC, int experience, string weaponName, int weaponStat, string type);
     string type;
     string weaponName;
     int weaponStat;
@@ -180,7 +183,7 @@ class Creature : public Being {
         cout << "---------- " << name << " ----------" << endl;
         cout << "Life: " << life << endl;
         cout << "Strength: " << strength << endl;
-        cout << "Intelligence: " << intelligence << endl;
+        cout << "Perception: " << perception << endl;
     }
 
     int getExperience () {
@@ -194,7 +197,7 @@ class Creature : public Being {
 
 class Boss : public Creature {
     public:
-    Boss(string name, int life, int strength, int intelligence, int AC, int experience, string weaponName, int weaponStat, string specialAction, string type);
+    Boss(string name, int life, int strength, int perception, int AC, int experience, string weaponName, int weaponStat, string specialAction, string type);
     string type;
     string weaponName;
     int weaponStat;
@@ -204,7 +207,7 @@ class Boss : public Creature {
         cout << "---------- " << name << " ----------" << endl;
         cout << "Life: " << life << endl;
         cout << "Strength: " << strength << endl;
-        cout << "Intelligence: " << intelligence << endl;
+        cout << "Perception: " << perception << endl;
     }
 };
 

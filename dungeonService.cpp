@@ -53,9 +53,9 @@ void useSpecialAction(string specialAction, Person &character, Creature &enemy) 
     }
     else {
         cout << "You attack the enemy with a vicious strike, gaining life in return!" << endl;
-        int attackRoll = (rand() % 20 + 1) + character.getStrength();
+        int attackRoll = (rand() % 20 + 2) + character.getStrength() + character.getPerception();
         if (attackRoll > enemy.getAC()) {
-            int damageRoll = (rand() % character.getWeaponStat() + 1) + character.getStrength();
+            int damageRoll = (rand() % character.getWeaponStat() + 1) + character.getStrength() + character.getPerception();
             enemy.setLife(enemy.getLife() - damageRoll);
             cout << "You hit the enemy for " << damageRoll << " damage" << endl;
             character.setLife(character.getLife() + damageRoll);
@@ -117,7 +117,7 @@ void battle(Person &character, Creature &enemy) {
                     }
                     character.addConsumable(-1);
                     cout << "You used a health potion" << endl;
-                    cout << "You have " << character.getConsumables() << " left" << endl;
+                    cout << "You have " << character.getConsumables() << " health potions left" << endl;
                 }
                 else {
                     cout << "You don't have any health potions" << endl;
@@ -133,6 +133,7 @@ void battle(Person &character, Creature &enemy) {
             }
             else {
                 cout << "You have no special actions left" << endl;
+                repeatMove = true;
             }
             break;
             case 4:
@@ -174,7 +175,211 @@ void battle(Person &character, Creature &enemy) {
         return;
     }
 };
+void doubleBattle(Person &character, Creature &enemy1, Creature &enemy2) {
+    srand(chrono::system_clock::to_time_t(chrono::system_clock::now()));
+    // battle system
 
+    int attackRoll, damageRoll, cont; 
+    int pot_amount;
+    const string battleOptions = " _______________________\n"
+                                 "|   Choose an action    |\n"
+                                 "|_______________________|\n"
+                                 "| 1. Attack             |\n"
+                                 "| 2. health potion      |\n"
+                                 "| 3. Use Special Action |\n"
+                                 "|_______________________|\n ";
+    cout << "You front of you stand two slimes " << endl;
+    while (character.getLife() > 0 && ((enemy1.getLife() > 0) || (enemy2.getLife() > 0))) {
+        int option, enemyOption;
+        bool repeatMove;
+        bool availableAttack = false;
+        do {
+            repeatMove = false;
+            cout << "You have " << character.getLife() << " life" << endl;
+            if (enemy1.getLife() > 0) {
+                cout << enemy1.getName() << " has " << enemy1.getLife() << " life" << endl;
+            }
+            else {
+                cout << enemy1.getName() << " has 0" << " life (Dead)" << endl;
+            }
+            if (enemy2.getLife() > 0) {
+                cout << enemy2.getName() << " has " << enemy2.getLife() << " life" << endl;
+            }
+            else {
+                cout << enemy2.getName() << " has 0" << " life (Dead)" << endl;
+            }
+
+
+            cout << battleOptions << endl;
+
+            cin >> option;
+            system("clear");
+            switch (option) {
+            case 1:
+                // attack
+                do {
+                    cout << "Select Attack Option" << endl;
+                    if (enemy1.getLife() > 0) {
+                        cout << "1. " << enemy1.getName() << endl;
+                    }
+                    else {
+                        cout << "1. " << enemy1.getName() << " (Dead)" << endl;
+                    }
+                    if (enemy2.getLife() > 0) {
+                        cout << "2. " << enemy2.getName() << endl;
+                    }
+                    else {
+                        cout << "2. " << enemy2.getName() << " (Dead)" << endl;
+                    }
+
+                    cin >> enemyOption;
+                    if (enemyOption == 1 && enemy1.getLife() > 0) {
+                        availableAttack = true;
+
+                    }
+                    else if (enemyOption == 2 && enemy2.getLife() > 0) {
+                        availableAttack = true;
+                 
+                    }
+                    else {
+                        system("clear");
+                        cout << "You can't attack that enemy" << endl;
+                    }
+                } while (!availableAttack);
+                attackRoll = (rand() % 20 + 1) + character.getStrength();
+
+                if (enemyOption == 1) {
+                    if (attackRoll > enemy1.getAC()) {
+                        damageRoll = (rand() % character.getWeaponStat() + 1) + character.getStrength();
+                        enemy1.setLife(enemy1.getLife() - damageRoll);
+                        cout << "You hit the enemy for " << damageRoll << " damage" << endl;
+                    }
+                    else {
+                        cout << "You missed" << endl;
+                    }}
+
+                else {
+                    if (attackRoll > enemy2.getAC()) {
+                        damageRoll = (rand() % character.getWeaponStat() + 1) + character.getStrength();
+                        enemy2.setLife(enemy2.getLife() - damageRoll);
+                        cout << "You hit the enemy for " << damageRoll << " damage" << endl;
+                    }
+                    else {
+                        cout << "You missed" << endl;
+                    }}
+                break;
+            case 2:
+                if (character.getConsumables() > 0) {
+                    if (character.getLife() + (10 * character.getLevel()) > character.getMaxLife()) {
+                        character.setLife(character.getMaxLife());
+                    }
+                    else {
+                        character.setLife(character.getLife() + (10 * character.getLevel()));
+                    }
+                    character.addConsumable(-1);
+                    cout << "You used a health potion" << endl;
+                    cout << "You have " << character.getConsumables() << " left" << endl;
+                }
+                else {
+                    cout << "You don't have any health potions" << endl;
+                }
+                repeatMove = true;
+                break;
+            case 3:
+                // use special action
+                do {
+                    cout << "Select Attack Option" << endl;
+                    if (enemy1.getLife() > 0) {
+                        cout << "1. " << enemy1.getName() << endl;
+                    }
+                    else {
+                        cout << "1. " << enemy1.getName() << " (Dead)" << endl;
+                    }
+                    if (enemy2.getLife() > 0) {
+                        cout << "2. " << enemy2.getName() << endl;
+                    }
+                    else {
+                        cout << "2. " << enemy2.getName() << " (Dead)" << endl;
+                    }
+
+                    cin >> enemyOption;
+                    if (enemyOption == 1 && enemy1.getLife() > 0) {
+                        availableAttack = true;
+
+                    }
+                    else if (enemyOption == 2 && enemy2.getLife() > 0) {
+                        availableAttack = true;
+                 
+                    }
+                    else {
+                        system("clear");
+                        cout << "You can't attack that enemy" << endl;
+                    }
+                } while (!availableAttack);
+                if (character.getSpecialActionCount() > 0) {
+                cout << "You used " << character.getSpecialAction() << endl;
+                if (enemyOption == 1) {
+                    useSpecialAction(character.getSpecialAction(), character, enemy1);
+                }
+                else {
+                    useSpecialAction(character.getSpecialAction(), character, enemy2);
+                }
+                character.setSpecialActionCount(character.getSpecialActionCount() - 1);
+            }
+            else {
+                cout << "You have no special actions left" << endl;
+                repeatMove = true;
+            }
+            break;
+
+            default:
+                break;
+            }
+        } while (repeatMove);
+        
+        if (enemy1.getLife() > 0) {
+            attackRoll = (rand() % 20 + 1) + enemy1.getStrength();
+            if (attackRoll > character.getAC()) {
+                damageRoll = (rand() % enemy1.getWeaponStat() + 1) + enemy1.getStrength();
+                character.setLife(character.getLife() - damageRoll);
+                cout << "The enemy hit you for " << damageRoll << " damage" << endl;
+            }
+            else {
+                cout << enemy1.getName() <<"missed" << endl;
+            }
+
+        }
+        if (enemy2.getLife() > 0) {
+            attackRoll = (rand() % 20 + 1) + enemy2.getStrength();
+            if (attackRoll > character.getAC()) {
+                damageRoll = (rand() % enemy2.getWeaponStat() + 1) + enemy2.getStrength();
+                character.setLife(character.getLife() - damageRoll);
+                cout << "The enemy hit you for " << damageRoll << " damage" << endl;
+            }
+            else {
+                cout << enemy2.getName() <<"missed" << endl;
+            }
+
+        }
+        // enemy attack
+        
+    }
+    if (character.getLife() <= 0) {
+        return;
+    }
+    else  {
+        cout << "" << endl;
+        cout << "You have killed the enemies!" << endl;
+        // add experience to character
+        cout << "You gain " << enemy1.getExperience() + enemy2.getExperience() << " experience!" << endl;
+        character.setExperience(character.getExperience() + enemy1.getExperience() + enemy2.getExperience());
+        cout << "" << endl;
+        cout << "Enter 0 to continue: " << endl;
+        cin >> cont;
+        system("clear");
+        return;
+    }
+};
 
 void searchRoom(Person &character){
     // random number generator from 1 to 10
@@ -182,6 +387,7 @@ void searchRoom(Person &character){
     cout << "As you walk around you ";
     srand(time(NULL));
     int random = rand() % 10 + 1;
+    random += character.getPerception() / 2;
     if (random <= 2) {
         cout << "find nothing" << endl;
         
@@ -205,8 +411,9 @@ void searchRoom(Person &character){
         cout << "Enter 0 to continue: " << endl;
         cin >> cont;
         system("clear");
-
+        
         random = rand() % 20 + 1;
+        random += character.getPerception();
         if (random == 1) {
             cout << "feel as if you have been cursed!" << endl;
             character.setStrength(character.getStrength() - 1);
@@ -221,21 +428,21 @@ void searchRoom(Person &character){
         else if (random < 13) {
             cout << "feel as if you have been blessed" << endl;
             character.setStrength(character.getStrength() + 1);
-            character.setIntelligence(character.getIntelligence() + 1);
+            character.setPerception(character.getPerception() + 1);
             character.restoreMaxLife();
            
         }
         else if (random < 20) {
             cout << "feel your weapon has been blessed with the power of the gods" << endl;
-            character.setWeaponStat(character.getWeaponStat() + 3);
+            character.setWeaponStat(character.getWeaponStat() + 2);
             character.setWeaponName("Blessed " + character.getWeaponName());
            
             }
         else {
             cout << "feel as if you have been blessed with the power of the gods" << endl;
             character.setStrength(character.getStrength() + 2);
-            character.setIntelligence(character.getIntelligence() + 2);
-            character.setWeaponStat(character.getWeaponStat() + 5);
+            character.setPerception(character.getPerception() + 2);
+            character.setWeaponStat(character.getWeaponStat() + 2);
             character.setWeaponName("Blessed " + character.getWeaponName());
             character.restoreMaxLife();
            

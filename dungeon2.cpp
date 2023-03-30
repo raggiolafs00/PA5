@@ -173,9 +173,9 @@ void hallBattle (Person &character, int distance) {
     Creature *bowman = new Creature("Undead Bowman", 15, 4, 2, 12, 20, "Longbow", 12, "Creature");
     if (character.getWeaponType() == "Ranged") {
         cout << "You have a ranged weapon, you can attack the undead bowman from here." << endl;
-        battle(character, *bowman);
-        return;
-    }
+        battle(character, *bowman);}
+        
+    else {
 
     cout << "You need to close the distance to the undead bowman." << endl;
     cout << "You take " << 5 - distance << " turns to get to the bowman." << endl;
@@ -202,6 +202,8 @@ void hallBattle (Person &character, int distance) {
     }
     cout << "You manage to reach the undead bowman and are now in attacking range." << endl;
     battle(character, *bowman);
+    }
+    
     if (deathCheck(character))
         return;
     cout << "As you gather your thoughts after that riveting battle, you see a closed door in front of you." << endl;

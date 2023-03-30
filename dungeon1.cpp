@@ -13,18 +13,16 @@
 // include random library
 #include <cstdlib>
 #include <ctime>
-// Creature::Creature(string name, int life, int strength, int intelligence, int AC, int experience, string weaponName, int weaponStat, string type = "Creature")
+// Creature::Creature(string name, int life, int strength, int perception, int AC, int experience, string weaponName, int weaponStat, string type = "Creature")
 
 using namespace std;
 
 void dungeonCreatures(vector <Creature*> &enemies) {
-    Creature *goblin = new Creature("Goblin", 12, 3, 0, 8, 10, "Bloody Book", 2, "Creature");
-    Creature *slime = new Creature("Green Slime", 20, 1, 0, 8, 15, "", 1, "Creature");
-    Creature *goblin2 = new Creature("Goblin", 20, 3, 0, 8, 10, "Dagger", 4, "Creature");
-    enemies.push_back(goblin);
-    enemies.push_back(goblin);
-    enemies.push_back(goblin);
-    enemies.push_back(goblin);
+    Creature *leftSlimeBoss = new Creature("Slimes left half", 15, 1, 0, 5, 15, "slime", 2, "Creature");
+    Creature *rightSlimeBoss = new Creature("Slimes right half", 15, 1, 0, 5, 15, "slime", 2, "Creature");
+    enemies.push_back(leftSlimeBoss);
+    enemies.push_back(rightSlimeBoss);
+
 
 }
 
@@ -97,6 +95,8 @@ void startDungeon1(Person &character){
     }
     battle(character, *goblin);
     if (deathCheck(character)) {
+            character.restoreMaxLife();
+            character.restoreSpecialActionCount();
             return;
         }
     theLongHallway(character, enemies);
@@ -104,12 +104,13 @@ void startDungeon1(Person &character){
 }
 
 void theLongHallway(Person &character, vector <Creature*> &enemies) {
-    int cont;
+    int cont, option;
+    
     Creature *slime = new Creature("Green Slime", 20, 1, 0, 5, 15, "slime", 1, "Creature");
     Creature *slime1 = new Creature("Blue Slime", 20, 1, 0, 8, 15, "slime", 1, "Creature");
     Creature *slimeBoss = new Creature("Giant green slime", 25, 3, 0, 8, 15, "Size", 3, "Creature");
-    Creature *leftSlimeBoss = new Creature("Green Slime", 15, 1, 0, 5, 15, "slime", 2, "Creature");
-    Creature *rightSlimeBoss = new Creature("Green Slime", 15, 1, 0, 5, 15, "slime", 2, "Creature");
+    Creature *leftSlimeBoss = new Creature("Slimes left half", 15, 1, 0, 5, 15, "slime", 2, "Creature");
+    Creature *rightSlimeBoss = new Creature("Slimes right half", 15, 1, 0, 5, 15, "slime", 2, "Creature");
 
 
 
@@ -128,63 +129,75 @@ void theLongHallway(Person &character, vector <Creature*> &enemies) {
     system("clear");
     battle(character, *slime);
     if (deathCheck(character)) {
-            return;
+        character.restoreMaxLife();
+        character.restoreSpecialActionCount();
+        return;
         }
+    cout << "The slime explodes as you kill it, you notice the room that it jumped from" << endl;
+    cout << "What do you do?" << endl;
+    cout << "1. Enter the room" << endl;
+    cout << "2. Keep going down the hall" << endl;
+    cin >> option;
+    system("clear");
     cout << "You enter the room the slime jumped from" << endl;
-    // make a 50% chance for another slime to spawn
-    int chance = rand() % 2;
-    if (chance == 1) {
-        cout << "As you enter the room you hear a squishy noise" << endl;
-        cout << "A blue slime jumps out of the room and lands in front of you with a squishy sound" << endl;
-        cout << "Enter 0 to continue: " << endl;
-        cin >> cont;
-        system("clear");
-        battle(character, *slime1);
-        if (deathCheck(character)) {
-            return;
+    if (option == 1){
+        int chance = rand() % 2;
+        if (chance == 1) {
+            cout << "As you enter the room you hear a squishy noise" << endl;
+            cout << "A blue slime jumps out of the room and lands in front of you with a squishy sound" << endl;
+            cout << "Enter 0 to continue: " << endl;
+            cin >> cont;
+            system("clear");
+            battle(character, *slime1);
+            if (deathCheck(character)) {
+                character.restoreMaxLife();
+                character.restoreSpecialActionCount();
+                return;
+            }
+           
         }
+         searchRoom(character);
     }
-    searchRoom(character);
-    cout << "You continue walking down the long hallway, your footsteps echoing off the stone walls." << endl;
+
+    
+   
+    
+    cout << "You continue walking down the long hallway" << endl;
     cout << "As you make your way deeper into the dungeon, you come across a huge door." << endl;
-    cout << "You push the door open and step inside, finding yourself face to face with the boss of this hallway: a massive, green slime." << endl;
+    cout << "You push the door open and step inside, finding yourself face to face with a massive, green slime." << endl;
     cout << "The slime's body towers over you, and its slimy tentacles twitch as it senses your presence." << endl;
     cout << "You can feel your heart pounding in your chest as you steel yourself for the battle ahead." << endl;
-    cout << "The slime lets out a low, guttural growl, and begins to move towards you, ready to attack." << endl; 
+    cout << "The slime lets out a low growl, and begins to move towards you, ready to attack." << endl; 
     cout << "" << endl;
     cout << "Enter 0 to continue: " << endl;
     cin >> cont;
     system("clear");
     battle(character, *slimeBoss);
         if (deathCheck(character)) {
+            character.restoreMaxLife();
+            character.restoreSpecialActionCount();
             return;
         }
     cout << "You dodge the slimy tentacle and land a solid hit on the slime, causing it to split into two smaller slimes." << endl;
-    cout << "One of the slimes is still recovering from the morphing process, while the other one immediately attacks you." << endl;
-    cout << "You quickly assess the situation and decide to take advantage of the slime's weakened state." << endl;
+    cout << "The slime's body begins to shrink as it splits, and the two smaller slimes begin to move towards you." << endl;
     cout << "" << endl;
     cout << "Enter 0 to continue: " << endl;
     cin >> cont;
     system("clear");
-      battle(character, *leftSlimeBoss);
+    doubleBattle(character, *leftSlimeBoss, *rightSlimeBoss);
         if (deathCheck(character)) {
+            character.restoreMaxLife();
+            character.restoreSpecialActionCount();
             return;
         }
-    cout << "The other slime has now fully formed, and it too begins to move towards you with malicious intent." << endl;
-    cout << "You take a deep breath and prepare yourself for the final round of battle, knowing that this won't be an easy fight." << endl;
-    cout << "" << endl;
-    cout << "Enter 0 to continue: " << endl;
-    cin >> cont;
-    battle(character, *rightSlimeBoss);
-        if (deathCheck(character)) {
-            return;
-        }
-    cout << "With the slime finally defeated, you take a few moments to catch your breath." << endl;
+
+    cout << "With the slimes finally defeated, you take a few moments to catch your breath." << endl;
     cout << "You look around the room and notice a chest in one of the piles of slime." << endl;
     cout << "You cautiously approach the chest and open it, revealing a brand new weapon and a few potions for your journy." << endl;
     cout << "" << endl;
     cout << "Enter 0 to continue: " << endl;
     cin >> cont;
+    system("clear");
     if (character.getPlayerClass() == "Rogue") {
         cout << "You found a dagger" << endl;
         cout << "this one is a little sharper than the last one" << endl;
@@ -193,14 +206,14 @@ void theLongHallway(Person &character, vector <Creature*> &enemies) {
         }
         else {
             character.setWeaponName("slimy dagger");
-            character.setWeaponStat(character.getWeaponStat() + 2);
+            character.setWeaponStat(character.getWeaponStat() + 3);
         }
   
     }
     else if (character.getPlayerClass() == "Warrior") {
         cout << "You found a sword" << endl;
         cout << "It's a little slimy but definetly an upgrade!" << endl;
-        if (character.getWeaponName() != "Short sword") {
+        if (character.getWeaponName() != "Short Sword") {
             character.setWeaponStat(character.getWeaponStat() + 1);
         }
         else {
@@ -212,7 +225,7 @@ void theLongHallway(Person &character, vector <Creature*> &enemies) {
     else {
         cout << "You found a bow!" << endl;
         cout << "It's smells a bit but nothing a small wash won't take care of" << endl;
-        if (character.getWeaponName() != "Long bow") {
+        if (character.getWeaponName() != "Long Bow") {
             character.setWeaponStat(character.getWeaponStat() + 1);
         }
         else {
@@ -221,15 +234,19 @@ void theLongHallway(Person &character, vector <Creature*> &enemies) {
         }
 
     }
+    character.addConsumable(2);
     cout << "" << endl;
     cout << "Enter 0 to continue: " << endl;
     cin >> cont;
+    system("clear");
     cout << "As you begin to pocket the loot, you notice a strange, shimmering portal in the corner of the room." << endl;
     cout << "Without hesitation, you step into the portal, eager to see where it leads." << endl;
     cout << "" << endl;
     cout << "Enter 0 to continue: " << endl;
     cin >> cont;
+    system("clear");
     character.restoreMaxLife();
+    character.restoreSpecialActionCount();
    
     
 
