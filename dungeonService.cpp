@@ -154,7 +154,7 @@ void battle(Person &character, Creature &enemy) {
             cout << "The enemy hit you for " << damageRoll << " damage" << endl;
         }
         else {
-            cout << "The enemy missed" << endl;
+            cout << "Your enemy missed" << endl;
         }
 
     }
@@ -163,10 +163,12 @@ void battle(Person &character, Creature &enemy) {
         return;
     }
     else if (enemy.getLife() <= 0) {
-        cout << "You killed the enemy" << endl;
+        cout << "" << endl;
+        cout << "You have killed the enemy!" << endl;
         // add experience to character
-        cout << "You gained " << enemy.getExperience() << " experience" << endl;
+        cout << "You gain " << enemy.getExperience() << " experience!" << endl;
         character.setExperience(character.getExperience() + enemy.getExperience());
+        cout << "" << endl;
         cout << "Enter 0 to continue: " << endl;
         cin >> cont;
         system("clear");
@@ -200,6 +202,7 @@ void searchRoom(Person &character){
         
         int option;
         cout << "when you approach it an aura surrounds you" << endl;
+        cout << "" << endl;
         cout << "Enter 0 to continue: " << endl;
         cin >> cont;
         system("clear");
@@ -248,5 +251,31 @@ void searchRoom(Person &character){
     cout << "Enter 0 to continue: " << endl;
     cin >> cont;
     system("clear");
+
+}
+
+void dungeonSelector(Person &character){
+    cout << "Choose an option: " << endl;
+    cout << "1. The lonely Saloon" << endl;
+    cout << "2. the icy spicy" << endl;
+    cout << "3. idk man ? " << endl;
+    cout << "4. Exit" << endl;
+    int option;
+    cin >> option;
+    system("clear");
+    switch (option) {
+        case 1:
+        startDungeon1(character);
+        break;
+        case 2:
+        startDungeon2(character);
+        break;
+        case 3:
+        //startDungeon3(character);
+        break;
+        case 4:
+        return;
+
+    }
 
 }

@@ -48,11 +48,18 @@ void startDungeon1(Person &character){
     cin >> cont;
     system("clear");
 
-
+    cout << "  ,     ," << endl;
+    cout << " / ~~~ \\ " << endl;
+    cout << "{  O  O }" << endl;
+    cout << "(       )" << endl;
+    cout << " \\  *  / " << endl;
+    cout << "  \\   /  " << endl;
+    cout << "    -   " << endl;
     cout << "1. Talk to the goblin" << endl;
     cout << "2. Attack the goblin" << endl;
     int option;
     cin >> option;
+    system("clear");
     if (option != 1 && option != 2) {
         cout << "while you took your time typing an invalid action you fall down and take 2 damage" << endl;
         character.setLife(character.getLife() - 2);
@@ -60,7 +67,6 @@ void startDungeon1(Person &character){
         cout << "Enter 0 to continue: " << endl;
         cin >> cont;
         system("clear");
-        battle(character, *goblin);
 
 
     }
@@ -72,7 +78,6 @@ void startDungeon1(Person &character){
         cout << "Enter 0 to continue: " << endl;
         cin >> cont;
         system("clear");
-        battle(character, *goblin);
 
        
 
@@ -84,13 +89,13 @@ void startDungeon1(Person &character){
         cout << "Enter 0 to continue: " << endl;
         cin >> cont;
         system("clear");
-        battle(character, *goblin);
         
   
     default:
        
         break;
     }
+    battle(character, *goblin);
     if (deathCheck(character)) {
             return;
         }
@@ -112,15 +117,12 @@ void theLongHallway(Person &character, vector <Creature*> &enemies) {
     cout << "With the goblin dead you get a few seconds to gather your thoughts" << endl;
     cout << "You see a open door infront of you that leads to a long hallway" << endl;
     searchRoom(character);
-    cout << "Enter 0 to continue: " << endl;
-    cin >> cont;
-    system("clear");
-
 
     cout << "You walk down the long hallway, trying to open several doors, but they are all locked" << endl;
     cout << "As you keep moving forward, you suddenly hear a creaking noise," << endl;
     cout << "and a door pops open" << endl;
     cout << "A green slime suddenly jumps out of the room and lands in front of you with a squishy sound" << endl;
+    cout << "" << endl;
     cout << "Enter 0 to continue: " << endl;
     cin >> cont;
     system("clear");
@@ -128,7 +130,7 @@ void theLongHallway(Person &character, vector <Creature*> &enemies) {
     if (deathCheck(character)) {
             return;
         }
-    cout << "You enter the room the slime jumped" << endl;
+    cout << "You enter the room the slime jumped from" << endl;
     // make a 50% chance for another slime to spawn
     int chance = rand() % 2;
     if (chance == 1) {
@@ -149,21 +151,87 @@ void theLongHallway(Person &character, vector <Creature*> &enemies) {
     cout << "The slime's body towers over you, and its slimy tentacles twitch as it senses your presence." << endl;
     cout << "You can feel your heart pounding in your chest as you steel yourself for the battle ahead." << endl;
     cout << "The slime lets out a low, guttural growl, and begins to move towards you, ready to attack." << endl; 
+    cout << "" << endl;
     cout << "Enter 0 to continue: " << endl;
-        cin >> cont;
-        system("clear");
+    cin >> cont;
+    system("clear");
     battle(character, *slimeBoss);
         if (deathCheck(character)) {
             return;
         }
-    battle(character, *leftSlimeBoss);
+    cout << "You dodge the slimy tentacle and land a solid hit on the slime, causing it to split into two smaller slimes." << endl;
+    cout << "One of the slimes is still recovering from the morphing process, while the other one immediately attacks you." << endl;
+    cout << "You quickly assess the situation and decide to take advantage of the slime's weakened state." << endl;
+    cout << "" << endl;
+    cout << "Enter 0 to continue: " << endl;
+    cin >> cont;
+    system("clear");
+      battle(character, *leftSlimeBoss);
         if (deathCheck(character)) {
             return;
         }
+    cout << "The other slime has now fully formed, and it too begins to move towards you with malicious intent." << endl;
+    cout << "You take a deep breath and prepare yourself for the final round of battle, knowing that this won't be an easy fight." << endl;
+    cout << "" << endl;
+    cout << "Enter 0 to continue: " << endl;
+    cin >> cont;
     battle(character, *rightSlimeBoss);
         if (deathCheck(character)) {
             return;
         }
+    cout << "With the slime finally defeated, you take a few moments to catch your breath." << endl;
+    cout << "You look around the room and notice a chest in one of the piles of slime." << endl;
+    cout << "You cautiously approach the chest and open it, revealing a brand new weapon and a few potions for your journy." << endl;
+    cout << "" << endl;
+    cout << "Enter 0 to continue: " << endl;
+    cin >> cont;
+    if (character.getPlayerClass() == "Rogue") {
+        cout << "You found a dagger" << endl;
+        cout << "this one is a little sharper than the last one" << endl;
+        if (character.getWeaponName() != "Dagger") {
+            character.setWeaponStat(character.getWeaponStat() + 1);
+        }
+        else {
+            character.setWeaponName("slimy dagger");
+            character.setWeaponStat(character.getWeaponStat() + 2);
+        }
+  
+    }
+    else if (character.getPlayerClass() == "Warrior") {
+        cout << "You found a sword" << endl;
+        cout << "It's a little slimy but definetly an upgrade!" << endl;
+        if (character.getWeaponName() != "Short sword") {
+            character.setWeaponStat(character.getWeaponStat() + 1);
+        }
+        else {
+            character.setWeaponName("slippery sword");
+            character.setWeaponStat(character.getWeaponStat() + 3);
+        }
+
+    }
+    else {
+        cout << "You found a bow!" << endl;
+        cout << "It's smells a bit but nothing a small wash won't take care of" << endl;
+        if (character.getWeaponName() != "Long bow") {
+            character.setWeaponStat(character.getWeaponStat() + 1);
+        }
+        else {
+            character.setWeaponName("Bow of slips");
+            character.setWeaponStat(character.getWeaponStat() + 3);
+        }
+
+    }
+    cout << "" << endl;
+    cout << "Enter 0 to continue: " << endl;
+    cin >> cont;
+    cout << "As you begin to pocket the loot, you notice a strange, shimmering portal in the corner of the room." << endl;
+    cout << "Without hesitation, you step into the portal, eager to see where it leads." << endl;
+    cout << "" << endl;
+    cout << "Enter 0 to continue: " << endl;
+    cin >> cont;
+    character.restoreMaxLife();
+   
+    
 
 
     
