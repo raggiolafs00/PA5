@@ -279,3 +279,23 @@ int showCharacters(vector <Person*> &characters) {
     }
     return choice;
 }
+
+int selectCharacter(vector <Person*> &characters) {
+    int choice = 10;
+    // show the created characters
+    while (choice != 100) {
+        cout << "-----------Characters----------" << endl;
+        for (int i = 0; i < characters.size(); i++) {
+            cout << i << ":" << " " << characters[i]->name << endl;
+        }
+        cout << "Select Character: " << endl;
+        cin >> choice;
+
+        system("clear");
+        if (choice <= characters.size() -1) {
+            return choice;
+    }
+
+}
+return 0;
+}

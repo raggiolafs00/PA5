@@ -50,8 +50,14 @@ int main () {
      }
          
         else if (option == "3") {
-            character = characters[0];
-            dungeonSelector(*character);
+            if (characters.size() == 0) {
+                cout << "You need to create a character first" << endl;
+                continue;
+            }
+            else {
+                selected_char = selectCharacter(characters);
+                character = characters[selected_char];
+                dungeonSelector(*character);}
      }
         else if (option == "4") {
             writeCharactersToFile(characters, characterFile);
