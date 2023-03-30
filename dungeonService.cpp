@@ -198,8 +198,7 @@ void searchRoom(Person &character){
         
     }
     else {
-        cout << "You find a weird shrine" << endl;
-        
+        cout << "find a weird shrine." << endl;
         int option;
         cout << "when you approach it an aura surrounds you" << endl;
         cout << "" << endl;
@@ -256,8 +255,8 @@ void searchRoom(Person &character){
 
 void dungeonSelector(Person &character){
     cout << "Choose an option: " << endl;
-    cout << "1. The lonely Saloon" << endl;
-    cout << "2. the icy spicy" << endl;
+    cout << "1. The Lonely Saloon" << endl;
+    cout << "2. The Abandoned Castle" << endl;
     cout << "3. idk man ? " << endl;
     cout << "4. Exit" << endl;
     int option;
