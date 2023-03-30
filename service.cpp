@@ -61,41 +61,43 @@ void createCharacter(vector <Person*> &characters, ofstream &characterFile) {
     cout << "2. Elf" << endl;
     cout << "3. Dwarf" << endl;
     cout << "4. Review Run" << endl;
-    int option;
+    string option;
     cin >> option;
     system("clear");
-    switch (option)
-    {
-        case 1:
+    if (option == "1"){
         race = "Human";
         life = 12;
         strength = 3;
         perception = 1;
         level = 1;
         experience = 0;
-        break;
-        case 2:
+}
+    else if (option == "2") {
         race = "Elf";
         life = 11;
         strength = 2;
         perception = 3;
         level = 1;
         experience = 0;
-        break;
-        case 3:
+}
+    else if (option == "3") {
         race = "Dwarf";
         life = 14;
         strength = 2;
         perception = 0;
         level = 1;
         experience = 0;
-        case 4:
+    }
+    else if (option == "4") {
         race = "Human";
         life = 250;
         strength = 50;
         perception = 30;
         level = 10;
         experience = 0;
+    } else {
+        cout << "Invalid option" << endl;
+        return;
     }
     cout << "Choose a class: " << endl;
     cout << "1. Warrior" << endl;
@@ -103,9 +105,7 @@ void createCharacter(vector <Person*> &characters, ofstream &characterFile) {
     cout << "3. Rogue" << endl;
     cin >> option;
     system("clear");
-    switch (option)
-    {
-        case 1:
+    if (option == "1") {
         playerClass = "Warrior";
         life += 2;
         strength += 2;
@@ -118,9 +118,9 @@ void createCharacter(vector <Person*> &characters, ofstream &characterFile) {
         AC = 12;
         specialAction = "Frenzy";
         specialActionCount = 3;
-        break;
+  }
 
-        case 2:
+    else if (option == "2") {
         playerClass = "Ranger";
         life -= 1;
         perception += 2;
@@ -132,9 +132,9 @@ void createCharacter(vector <Person*> &characters, ofstream &characterFile) {
         AC = 10;
         specialAction = "True shot";
         specialActionCount = 3;
-        break;
+   }
 
-        case 3:
+   else {
         playerClass = "Rogue";
         life += 0;
         strength += 1;
@@ -147,7 +147,7 @@ void createCharacter(vector <Person*> &characters, ofstream &characterFile) {
         AC = 12;
         specialAction = "Sneak Attack";
         specialActionCount = 3;
-        break;
+  
     }
 
     getline(cin, bugfix);
@@ -160,9 +160,6 @@ void createCharacter(vector <Person*> &characters, ofstream &characterFile) {
     system("clear");
     cout << "Your character is: " << endl;
     Person *character = new Person(name, life, strength, perception, AC, gender, level, experience, weaponName, weaponType, weaponStat, armorName, consumables, specialAction, specialActionCount, race, playerClass, "Person");
-    // cout << character->race << endl;
-    // cout << character->playerClass << endl;
-    // cout << character->specialAction << endl;
     characters.push_back(character);
 }
 

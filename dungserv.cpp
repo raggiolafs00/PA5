@@ -98,7 +98,7 @@ void startDungeon1(Person &character){
 }
 
 void theLongHallway(Person &character, vector <Creature*> &enemies) {
-    string cont, option;
+    int cont, option;
     
     Creature *slime = new Creature("Green Slime", 20, 1, 0, 5, 15, "slime", 1, "Creature");
     Creature *slime1 = new Creature("Blue Slime", 20, 1, 0, 8, 15, "slime", 1, "Creature");
@@ -134,7 +134,7 @@ void theLongHallway(Person &character, vector <Creature*> &enemies) {
     cin >> option;
     system("clear");
     cout << "You enter the room the slime jumped from" << endl;
-    if (option == "1"){
+    if (option == 1){
         int chance = rand() % 2;
         if (chance == 1) {
             cout << "As you enter the room you hear a squishy noise" << endl;

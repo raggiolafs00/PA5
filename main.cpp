@@ -23,7 +23,7 @@ int main () {
     Person *character;
     
     system("clear");
-    int option;
+    string option;
     int selected_char = 0;
     readBeingsFromFile(characters, "characters.txt");
     cout << "Welcome to Dungeon Crawler" << endl;
@@ -34,7 +34,7 @@ int main () {
     characterFile.open("characters.txt");
     
 
-    while (option != 6) {
+    while (option != "Exit") {
         cout << "Choose an option: " << endl;
         cout << "1. Create Character" << endl;
         cout << "2. Show Character List" << endl;
@@ -42,30 +42,23 @@ int main () {
         cout << "4. Exit" << endl;
         cin >> option;
         system("clear");
-        switch (option)
-        {
-        case 1:
+        if (option == "1") {
             createCharacter(characters, characterFile);
-            break;
-        case 2:
+         }
+        else if (option == "2") {
             selected_char = showCharacters(characters);
-            break;
+     }
          
-        case 3:
+        else if (option == "3") {
             character = characters[0];
             dungeonSelector(*character);
-            // startDungeon1(*character);
-            break;
-        case 4:
+     }
+        else if (option == "4") {
             writeCharactersToFile(characters, characterFile);
             exit(0);
-            break;
-        case 5:
-            character = characters[0];
-            startDungeon2(*character);
-            break;
-        default:
-            exit(0);
+        }
+        else {
+            cout << "Invalid option" << endl;
         }
     }
         return 0;

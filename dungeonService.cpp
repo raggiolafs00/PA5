@@ -71,19 +71,18 @@ void useSpecialAction(string specialAction, Person &character, Creature &enemy) 
 void battle(Person &character, Creature &enemy) {
     srand(chrono::system_clock::to_time_t(chrono::system_clock::now()));
     // battle system
-    int attackRoll, damageRoll, cont; 
-    int pot_amount;
+    int attackRoll, damageRoll, pot_amount; 
+    string cont;
     const string battleOptions = " _______________________\n"
                                  "|   Choose an action    |\n"
                                  "|_______________________|\n"
                                  "| 1. Attack             |\n"
                                  "| 2. health potion      |\n"
                                  "| 3. Use Special Action |\n"
-                                 "| 4. Run                |\n"
                                  "|_______________________|\n ";
     cout << "You have encountered a " << enemy.getName() << endl;
     while (character.getLife() > 0 && enemy.getLife() > 0) {
-        int option;
+        string option;
         bool repeatMove;
         do {
             repeatMove = false;
@@ -94,9 +93,7 @@ void battle(Person &character, Creature &enemy) {
 
             cin >> option;
             system("clear");
-            switch (option) {
-            case 1:
-                // attack
+            if (option == "1") {
                 attackRoll = (rand() % 20 + 1) + character.getStrength();
                 if (attackRoll > enemy.getAC()) {
                     damageRoll = (rand() % character.getWeaponStat() + 1) + character.getStrength();
@@ -106,41 +103,47 @@ void battle(Person &character, Creature &enemy) {
                 else {
                     cout << "You missed" << endl;
                 }
-                break;
-            case 2:
+            }
+            else if (option == "2") {
                 if (character.getConsumables() > 0) {
-                    if (character.getLife() + (10 * character.getLevel()) > character.getMaxLife()) {
+                     if (character.getLife() > character.getMaxLife()) {
+                        cout << "Rogues are sometimes so healthy that they don't need a drink" << endl;
+                    }
+                    else if (character.getLife() + (10 * character.getLevel()) > character.getMaxLife()) {
                         character.setLife(character.getMaxLife());
+                        character.addConsumable(-1);
+                        cout << "You used a health potion" << endl;
+                        cout << "You have " << character.getConsumables() << " health potions left" << endl;
                     }
                     else {
                         character.setLife(character.getLife() + (10 * character.getLevel()));
+                        character.addConsumable(-1);
+                        cout << "You used a health potion" << endl;
+                        cout << "You have " << character.getConsumables() << " health potions left" << endl;
+
                     }
-                    character.addConsumable(-1);
-                    cout << "You used a health potion" << endl;
-                    cout << "You have " << character.getConsumables() << " health potions left" << endl;
+            
                 }
                 else {
                     cout << "You don't have any health potions" << endl;
                 }
                 repeatMove = true;
-                break;
-            case 3:
-                // use special action
+                }
+            else if (option == "3") {
+       
                 if (character.getSpecialActionCount() > 0) {
                 cout << "You used " << character.getSpecialAction() << endl;
                 useSpecialAction(character.getSpecialAction(), character, enemy);
                 character.setSpecialActionCount(character.getSpecialActionCount() - 1);
             }
-            else {
-                cout << "You have no special actions left" << endl;
-                repeatMove = true;
+                else {
+                    cout << "You have no special actions left" << endl;
+                    repeatMove = true;
             }
-            break;
-            case 4:
-                // run
-                break;
-            default:
-                break;
+            }
+            else {
+                cout << "Invalid option you lose your turn" << endl;
+          
             }
         } while (repeatMove);
         
@@ -179,8 +182,8 @@ void doubleBattle(Person &character, Creature &enemy1, Creature &enemy2) {
     srand(chrono::system_clock::to_time_t(chrono::system_clock::now()));
     // battle system
 
-    int attackRoll, damageRoll, cont; 
-    int pot_amount;
+    int attackRoll, damageRoll, pot_amount; 
+    string cont;
     const string battleOptions = " _______________________\n"
                                  "|   Choose an action    |\n"
                                  "|_______________________|\n"
@@ -190,7 +193,7 @@ void doubleBattle(Person &character, Creature &enemy1, Creature &enemy2) {
                                  "|_______________________|\n ";
     cout << "You front of you stand two slimes " << endl;
     while (character.getLife() > 0 && ((enemy1.getLife() > 0) || (enemy2.getLife() > 0))) {
-        int option, enemyOption;
+        string option, enemyOption;
         bool repeatMove;
         bool availableAttack = false;
         do {
@@ -214,8 +217,7 @@ void doubleBattle(Person &character, Creature &enemy1, Creature &enemy2) {
 
             cin >> option;
             system("clear");
-            switch (option) {
-            case 1:
+            if (option == "1") {
                 // attack
                 do {
                     cout << "Select Attack Option" << endl;
@@ -233,11 +235,11 @@ void doubleBattle(Person &character, Creature &enemy1, Creature &enemy2) {
                     }
 
                     cin >> enemyOption;
-                    if (enemyOption == 1 && enemy1.getLife() > 0) {
+                    if (enemyOption == "1" && enemy1.getLife() > 0) {
                         availableAttack = true;
 
                     }
-                    else if (enemyOption == 2 && enemy2.getLife() > 0) {
+                    else if (enemyOption == "2" && enemy2.getLife() > 0) {
                         availableAttack = true;
                  
                     }
@@ -248,7 +250,7 @@ void doubleBattle(Person &character, Creature &enemy1, Creature &enemy2) {
                 } while (!availableAttack);
                 attackRoll = (rand() % 20 + 1) + character.getStrength();
 
-                if (enemyOption == 1) {
+                if (enemyOption == "1") {
                     if (attackRoll > enemy1.getAC()) {
                         damageRoll = (rand() % character.getWeaponStat() + 1) + character.getStrength();
                         enemy1.setLife(enemy1.getLife() - damageRoll);
@@ -267,26 +269,32 @@ void doubleBattle(Person &character, Creature &enemy1, Creature &enemy2) {
                     else {
                         cout << "You missed" << endl;
                     }}
-                break;
-            case 2:
+               }
+            if (option == "2") {
                 if (character.getConsumables() > 0) {
-                    if (character.getLife() + (10 * character.getLevel()) > character.getMaxLife()) {
+                     if (character.getLife() > character.getMaxLife()) {
+                        cout << "Rogues are sometimes so healthy that they don't need a drink" << endl;
+                    }
+                    else if (character.getLife() + (10 * character.getLevel()) > character.getMaxLife()) {
                         character.setLife(character.getMaxLife());
+                        character.addConsumable(-1);
+                        cout << "You used a health potion" << endl;
+                        cout << "You have " << character.getConsumables() << " health potions left" << endl;
                     }
                     else {
                         character.setLife(character.getLife() + (10 * character.getLevel()));
+                        character.addConsumable(-1);
+                        cout << "You used a health potion" << endl;
+                        cout << "You have " << character.getConsumables() << " health potions left" << endl;
+
                     }
-                    character.addConsumable(-1);
-                    cout << "You used a health potion" << endl;
-                    cout << "You have " << character.getConsumables() << " left" << endl;
                 }
                 else {
                     cout << "You don't have any health potions" << endl;
                 }
                 repeatMove = true;
-                break;
-            case 3:
-                // use special action
+                }
+           if (option == "3") {
                 do {
                     cout << "Select Attack Option" << endl;
                     if (enemy1.getLife() > 0) {
@@ -303,11 +311,11 @@ void doubleBattle(Person &character, Creature &enemy1, Creature &enemy2) {
                     }
 
                     cin >> enemyOption;
-                    if (enemyOption == 1 && enemy1.getLife() > 0) {
+                    if (enemyOption == "1" && enemy1.getLife() > 0) {
                         availableAttack = true;
 
                     }
-                    else if (enemyOption == 2 && enemy2.getLife() > 0) {
+                    else if (enemyOption == "2" && enemy2.getLife() > 0) {
                         availableAttack = true;
                  
                     }
@@ -318,7 +326,7 @@ void doubleBattle(Person &character, Creature &enemy1, Creature &enemy2) {
                 } while (!availableAttack);
                 if (character.getSpecialActionCount() > 0) {
                 cout << "You used " << character.getSpecialAction() << endl;
-                if (enemyOption == 1) {
+                if (enemyOption == "1") {
                     useSpecialAction(character.getSpecialAction(), character, enemy1);
                 }
                 else {
@@ -330,11 +338,8 @@ void doubleBattle(Person &character, Creature &enemy1, Creature &enemy2) {
                 cout << "You have no special actions left" << endl;
                 repeatMove = true;
             }
-            break;
+           }
 
-            default:
-                break;
-            }
         } while (repeatMove);
         
         if (enemy1.getLife() > 0) {
@@ -345,7 +350,7 @@ void doubleBattle(Person &character, Creature &enemy1, Creature &enemy2) {
                 cout << "The enemy hit you for " << damageRoll << " damage" << endl;
             }
             else {
-                cout << enemy1.getName() <<"missed" << endl;
+                cout << enemy1.getName() <<" missed" << endl;
             }
 
         }
@@ -357,11 +362,11 @@ void doubleBattle(Person &character, Creature &enemy1, Creature &enemy2) {
                 cout << "The enemy hit you for " << damageRoll << " damage" << endl;
             }
             else {
-                cout << enemy2.getName() <<"missed" << endl;
+                cout << enemy2.getName() <<" missed" << endl;
             }
 
         }
-        // enemy attack
+
         
     }
     if (character.getLife() <= 0) {
@@ -383,7 +388,7 @@ void doubleBattle(Person &character, Creature &enemy1, Creature &enemy2) {
 
 void searchRoom(Person &character){
     // random number generator from 1 to 10
-    int cont;
+    string cont;
     cout << "As you walk around you ";
     srand(time(NULL));
     int random = rand() % 10 + 1;
@@ -405,7 +410,6 @@ void searchRoom(Person &character){
     else {
         cout << "You find a weird shrine" << endl;
         
-        int option;
         cout << "When you approach it an aura surrounds you" << endl;
         cout << "" << endl;
         cout << "Enter 0 to continue: " << endl;
@@ -461,20 +465,19 @@ void dungeonSelector(Person &character){
     cout << "2. The Abandoned Castle" << endl;
     cout << "3. idk man ? " << endl;
     cout << "4. Exit" << endl;
-    int option;
+    string option;
     cin >> option;
     system("clear");
-    switch (option) {
-        case 1:
+    if (option == "1") {
         startDungeon1(character);
-        break;
-        case 2:
+     }
+    else if (option == "2") {
         startDungeon2(character);
-        break;
-        case 3:
-        //startDungeon3(character);
-        break;
-        case 4:
+}
+    else if (option == "3") {
+        cout << "This dungeon is not yet available" << endl;
+}
+    else {
         return;
 
     }
