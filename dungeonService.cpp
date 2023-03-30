@@ -208,31 +208,31 @@ void searchRoom(Person &character){
 
         random = rand() % 20 + 1;
         if (random == 1) {
-            cout << "you feel as if you have been cursed" << endl;
+            cout << "feel as if you have been cursed!" << endl;
             character.setStrength(character.getStrength() - 1);
             
 
         }
         else if (random < 6) {
-            cout << "You suddenly feel as if you just refreshed as if all your ailments have dissapeared" << endl;
+            cout << "suddenly feel as if you just refreshed as if all your ailments have dissapeared" << endl;
             character.getMaxLife();
           
         }
         else if (random < 13) {
-            cout << "You feel as if you have been blessed" << endl;
+            cout << "feel as if you have been blessed" << endl;
             character.setStrength(character.getStrength() + 1);
             character.setIntelligence(character.getIntelligence() + 1);
             character.restoreMaxLife();
            
         }
         else if (random < 20) {
-            cout << "your weapon has been blessed with the power of the gods" << endl;
+            cout << "feel your weapon has been blessed with the power of the gods" << endl;
             character.setWeaponStat(character.getWeaponStat() + 3);
             character.setWeaponName("Blessed " + character.getWeaponName());
            
             }
         else {
-            cout << "You feel as if you have been blessed with the power of the gods" << endl;
+            cout << "feel as if you have been blessed with the power of the gods" << endl;
             character.setStrength(character.getStrength() + 2);
             character.setIntelligence(character.getIntelligence() + 2);
             character.setWeaponStat(character.getWeaponStat() + 5);
