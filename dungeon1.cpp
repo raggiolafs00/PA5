@@ -33,7 +33,7 @@ void dungeonCreatures(vector <Creature*> &enemies) {
 void startDungeon1(Person &character){
     vector<Creature*> enemies;
     dungeonCreatures(enemies);
-    int cont;
+    string cont;
     Creature *goblin = new Creature("Goblin", 12, 3, 0, 8, 10, "Bloody Book", 2, "Creature");
     cout << "The Pub" << endl;
     cout << "" << endl;
@@ -55,10 +55,10 @@ void startDungeon1(Person &character){
     cout << "    -   " << endl;
     cout << "1. Talk to the goblin" << endl;
     cout << "2. Attack the goblin" << endl;
-    int option;
+    string option;
     cin >> option;
     system("clear");
-    if (option != 1 && option != 2) {
+    if (option != "1" && option != "2") {
         cout << "while you took your time typing an invalid action you fall down and take 2 damage" << endl;
         character.setLife(character.getLife() - 2);
         cout << "the goblin takes advantage of your stupidity and attacks you" << endl;
@@ -68,31 +68,25 @@ void startDungeon1(Person &character){
 
 
     }
-    switch (option)
-    {
-    case 1:
+    if (option == "1") {
         cout << "You try starting a converstation with the goblin but it doesn't seem as eager to have a converstation" << endl;
         cout << "Goblin: SCREEEEEEEEEEEEEECH" << endl;
         cout << "Enter 0 to continue: " << endl;
         cin >> cont;
         system("clear");
 
-       
-
+    }
         
-        break;
-    case 2:
+    else if (option == "2") {
+
         cout << "As the goblin approaches you it gives out a horrible screech" << endl;
         cout << "Goblin: SCREEEEEEEEEEEEEECH" << endl;
         cout << "Enter 0 to continue: " << endl;
         cin >> cont;
         system("clear");
         
-  
-    default:
-       
-        break;
     }
+
     battle(character, *goblin);
     if (deathCheck(character)) {
             character.restoreMaxLife();
@@ -104,7 +98,7 @@ void startDungeon1(Person &character){
 }
 
 void theLongHallway(Person &character, vector <Creature*> &enemies) {
-    int cont, option;
+    string cont, option;
     
     Creature *slime = new Creature("Green Slime", 20, 1, 0, 5, 15, "slime", 1, "Creature");
     Creature *slime1 = new Creature("Blue Slime", 20, 1, 0, 8, 15, "slime", 1, "Creature");
@@ -140,7 +134,7 @@ void theLongHallway(Person &character, vector <Creature*> &enemies) {
     cin >> option;
     system("clear");
     cout << "You enter the room the slime jumped from" << endl;
-    if (option == 1){
+    if (option == "1"){
         int chance = rand() % 2;
         if (chance == 1) {
             cout << "As you enter the room you hear a squishy noise" << endl;
