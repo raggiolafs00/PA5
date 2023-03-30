@@ -145,6 +145,9 @@ class Person : public Being {
     void restoreSpecialActionCount() {
         this->specialActionCount = 3;
     }
+    string getPlayerClass() {
+        return this->playerClass;
+    }
 };
 
 class Creature : public Being {

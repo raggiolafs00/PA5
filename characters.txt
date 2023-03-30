@@ -1,2 +1,0 @@
-Name,Life,Strength,Intelligence,Type,AC,Gender,Level,Experience,WeaponName,WeaponType,WeaponStat,ArmorName,Consumables,SpecialAction,SpecialActionCount,Race,PlayerClass
-armar,14,11,0,Person,12,arnar,5,40,11,Short Sword,Melee,8,Chain Mail,11,Frenzy,3,Human,Warrior

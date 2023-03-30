@@ -7,6 +7,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include "dungeonService.h"
 
 // include random library
 #include <cstdlib>
@@ -52,7 +53,8 @@ int main () {
          
         case 3:
             character = characters[0];
-            startDungeon1(*character);
+            dungeonSelector(*character);
+            // startDungeon1(*character);
             break;
         case 4:
             writeCharactersToFile(characters, characterFile);
