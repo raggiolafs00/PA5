@@ -1,3 +1,0 @@
-Name,Life,Strength,Intelligence,Type,AC,Gender,Level,Experience,WeaponName,WeaponType,WeaponStat,ArmorName,Consumables,SpecialAction,SpecialActionCount,Race,PlayerClass
-armar,14,11,0,Person,12,arnar,5,40,41,41,11,0,,41,,0,,
-male,14,5,0,Person,12,1,1,0,41,4,Short Sword,0,,41,,0,,

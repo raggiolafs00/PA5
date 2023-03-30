@@ -32,7 +32,7 @@ int main () {
     // create a file to save the characters
     ofstream characterFile;
     characterFile.open("characters.txt");
-    
+ 
 
     while (option != 6) {
         cout << "Choose an option: " << endl;
@@ -61,7 +61,6 @@ int main () {
             exit(0);
             break;
         case 5:
-            character = characters[0];
             startDungeon2(*character);
             break;
         default:

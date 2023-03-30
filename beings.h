@@ -40,10 +40,6 @@ class Being {
         return AC;
     }
 
-    void setAC(int AC) {
-        this->AC = AC;
-    }
-
     void setLife(int life) {
         this->life = life;
     }
@@ -118,11 +114,6 @@ class Person : public Being {
     string getWeaponType() {
         return this->weaponType;
     }
-
-    void setWeaponType(string type) {
-        this->weaponType = type;
-    }
-
     string getWeaponName() {
         return this->weaponName;
     }
@@ -137,14 +128,6 @@ class Person : public Being {
     }
     void setWeaponName(string weaponName) {
         this->weaponName = weaponName;
-    }
-
-    string getArmorName() {
-        return this->armorName;
-    }
-
-    void setArmorName(string armorName) {
-        this->armorName = armorName;
     }
 
     string getSpecialAction() {
