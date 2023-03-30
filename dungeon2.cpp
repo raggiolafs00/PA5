@@ -63,7 +63,10 @@ void theInnerSanctum(Person &character) {
     cin >> cont;
     system("clear");
     battle(character, *godrick);
-
+    if (deathCheck(character)) {
+        return;
+    }
+    cout << "Godrick falls to his knees, his robes billowing around him as he gasps for breath" << endl;
 }
 
 void castleSecondFloor(Person &character) {

@@ -1,0 +1,2 @@
+Name,Life,Strength,Perception,Type,AC,Gender,Level,Experience,WeaponName,WeaponType,WeaponStat,ArmorName,Consumables,SpecialAction,SpecialActionCount,Race,PlayerClass
+Ragnar,14,5,0,Person,12,male,1,0,Short Sword,Melee,8,Chain Mail,4,Frenzy,3,Human,Warrior
