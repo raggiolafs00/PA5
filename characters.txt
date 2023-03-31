@@ -1,2 +1,2 @@
 Name,Life,Strength,Perception,Type,AC,Gender,Level,Experience,WeaponName,WeaponType,WeaponStat,ArmorName,Consumables,SpecialAction,SpecialActionCount,Race,PlayerClass
-Hrogar,252,52,29,Person,12,male,10,0,Short Sword,Melee,8,Chain Mail,4,Frenzy,3,Human,Warrior
+Hrogar,252,52,29,Person,16,male,10,150,Short Sword,Melee,8,Plated armor,4,Frenzy,3,Human,Warrior

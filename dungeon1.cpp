@@ -22,13 +22,7 @@ void dungeonCreatures(vector <Creature*> &enemies) {
     Creature *rightSlimeBoss = new Creature("Slimes right half", 15, 1, 0, 5, 15, "slime", 2, "Creature");
     enemies.push_back(leftSlimeBoss);
     enemies.push_back(rightSlimeBoss);
-
-
 }
-
-
-
-
 
 void startDungeon1(Person &character){
     vector<Creature*> enemies;

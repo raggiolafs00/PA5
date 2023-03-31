@@ -138,6 +138,9 @@ void startDungeon3(Person &character) {
     if (deathCheck(character)) {
         return;
     }
-    return theDarkTower(character);
+    theDarkTower(character);
+    character.restoreMaxLife();
+    character.restoreSpecialActionCount();
+    return;
     
 }
