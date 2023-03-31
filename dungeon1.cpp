@@ -240,13 +240,5 @@ void theLongHallway(Person &character, vector <Creature*> &enemies) {
     cin >> cont;
     system("clear");
     character.restoreMaxLife();
-    character.restoreSpecialActionCount();
-   
-    
-
-
-    
-    
-
-        
+    character.restoreSpecialActionCount();        
 }

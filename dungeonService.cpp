@@ -2,6 +2,7 @@
 #include "service.h"
 #include "dungeon1.h"
 #include "dungeon2.h"
+#include "dungeon3.h"
 #include "dungeonService.h"
 #include <iostream>
 #include <chrono>
@@ -191,7 +192,7 @@ void doubleBattle(Person &character, Creature &enemy1, Creature &enemy2) {
                                  "| 2. health potion      |\n"
                                  "| 3. Use Special Action |\n"
                                  "|_______________________|\n ";
-    cout << "You front of you stand two slimes " << endl;
+
     while (character.getLife() > 0 && ((enemy1.getLife() > 0) || (enemy2.getLife() > 0))) {
         string option, enemyOption;
         bool repeatMove;
@@ -211,8 +212,6 @@ void doubleBattle(Person &character, Creature &enemy1, Creature &enemy2) {
             else {
                 cout << enemy2.getName() << " has 0" << " life (Dead)" << endl;
             }
-
-
             cout << battleOptions << endl;
 
             cin >> option;
@@ -296,7 +295,7 @@ void doubleBattle(Person &character, Creature &enemy1, Creature &enemy2) {
                 }
            if (option == "3") {
                 do {
-                    cout << "Select Attack Option" << endl;
+                    cout << "Select Enemy to Attack:" << endl;
                     if (enemy1.getLife() > 0) {
                         cout << "1. " << enemy1.getName() << endl;
                     }
@@ -311,6 +310,7 @@ void doubleBattle(Person &character, Creature &enemy1, Creature &enemy2) {
                     }
 
                     cin >> enemyOption;
+                    system("clear");
                     if (enemyOption == "1" && enemy1.getLife() > 0) {
                         availableAttack = true;
 
@@ -366,8 +366,6 @@ void doubleBattle(Person &character, Creature &enemy1, Creature &enemy2) {
             }
 
         }
-
-        
     }
     if (character.getLife() <= 0) {
         return;
@@ -449,8 +447,6 @@ void searchRoom(Person &character){
             character.setWeaponStat(character.getWeaponStat() + 2);
             character.setWeaponName("Blessed " + character.getWeaponName());
             character.restoreMaxLife();
-           
-
         }
 }
     cout << "Enter 0 to continue: " << endl;
@@ -463,7 +459,7 @@ void dungeonSelector(Person &character){
     cout << "Choose an option: " << endl;
     cout << "1. The Lonely Saloon" << endl;
     cout << "2. The Abandoned Castle" << endl;
-    cout << "3. idk man ? " << endl;
+    cout << "3. The Dark Plains" << endl;
     cout << "4. Exit" << endl;
     string option;
     cin >> option;
@@ -475,7 +471,18 @@ void dungeonSelector(Person &character){
         startDungeon2(character);
 }
     else if (option == "3") {
-        cout << "This dungeon is not yet available" << endl;
+        cout << "You should only enter this dungeon if you have completed the other two dungeons!" << endl;
+        cout << "Are you sure you want to enter? (y/n)" << endl;
+        string option;
+        cin >> option;
+        system("clear");
+        if (option == "y") {
+            
+            startDungeon3(character);
+        }
+        else {
+            return;
+        }
 }
     else {
         return;

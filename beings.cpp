@@ -35,13 +35,6 @@ Creature::Creature(string name, int life, int strength, int perception, int AC, 
     this->type = type;
 }
 
-Boss::Boss(string name, int life, int strength, int perception, int AC, int experience, string weponName, int weaponStat, string specialAction, string type = "Boss")
-    : Creature(name, life, strength, perception, AC, experience, weaponName, weaponStat, type) {
-    this->type = type;
-    this->specialAction = specialAction;
-
-}
-
 
 
 

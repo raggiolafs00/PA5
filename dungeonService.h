@@ -9,6 +9,8 @@ void battle(Person &character, Creature &enemy);
 bool deathCheck(Being &character);
 void searchRoom(Person &character);
 void dungeonSelector(Person &character);
+void searchRoom(Person &character);
+
 
 
 

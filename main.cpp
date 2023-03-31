@@ -57,7 +57,8 @@ int main () {
             else {
                 selected_char = selectCharacter(characters);
                 character = characters[selected_char];
-                dungeonSelector(*character);}
+                dungeonSelector(*character);
+            }
      }
         else if (option == "4") {
             writeCharactersToFile(characters, characterFile);

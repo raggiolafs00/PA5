@@ -28,6 +28,10 @@ class Being {
         return maxLife;
     }
 
+    string getType() {
+        return type;
+    }
+
     int getStrength() {
         return strength;
     }
@@ -192,22 +196,6 @@ class Creature : public Being {
 
     int getWeaponStat() {
         return this->weaponStat;
-    }
-};
-
-class Boss : public Creature {
-    public:
-    Boss(string name, int life, int strength, int perception, int AC, int experience, string weaponName, int weaponStat, string specialAction, string type);
-    string type;
-    string weaponName;
-    int weaponStat;
-    string specialAction;
-
-    virtual void showTemplate() {
-        cout << "---------- " << name << " ----------" << endl;
-        cout << "Life: " << life << endl;
-        cout << "Strength: " << strength << endl;
-        cout << "Perception: " << perception << endl;
     }
 };
 
